@@ -1,0 +1,8 @@
+# DoGoDev is dev tooling — nothing runtime lives here, but keep the usual noise out.
+node_modules/
+*.log
+.env
+.DS_Store
+
+# Per-user, per-machine notes that shouldn't ship with the suite
+CLAUDE.local.md
