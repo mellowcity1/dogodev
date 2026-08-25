@@ -21,5 +21,10 @@ affected, layout described in markdown (tables/lists, not pictures), exact on-sc
 copy, and every state — empty, loading, error, and any locked/disabled state. Where a
 report or document output is involved, show the section order and one worked example row.
 
+If you describe a formatting rule in prose (padding, truncation, sort order), make your
+worked example actually demonstrate it. A builder implements from whichever is more
+concrete — the example wins on any disagreement — so prose that isn't backed by its own
+example is a trap, not a spec.
+
 If an acceptance criterion cannot be met without changing scope, do not redesign the
 requirement — write it into **Open questions** for the analyst and stop.
