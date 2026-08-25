@@ -355,10 +355,19 @@ footer .gloss{margin-top:8px; font-family:var(--font-mono); font-size:.78rem}
         <p class="aside">This downloads DoGoDev to a temp folder, copies just the <code>.claude</code> folder and <code>CLAUDE.md</code> into your project, then deletes the temp copy — your project doesn't end up with DoGoDev's own git history in it.</p>
       </div></div>
       <div class="walk-step"><div class="walk-num">3</div><div class="walk-body">
+        <h3>Tell it about your project</h3>
+        <p>Open <code>CLAUDE.md</code> (VS Code, or any text editor) and fill in the <b>“Your project’s house rules”</b> section near the bottom. This is the one step that makes the agents build <em>your</em> thing instead of guessing — skip it and the analyst is flying blind.</p>
+        <p>For a brand-new idea, you don’t need every line answered — just what you already know. At minimum, say what you’re building and in what language:</p>
+        <div class="term"><div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">CLAUDE.md</span></div>
+          <pre>Stack: Node 22.5+, plain JavaScript, no frameworks.
+The covenant: keep it simple — no paid services, nothing that needs an account to run.</pre></div>
+        <p class="aside">Leave the rest as the template’s placeholder text for now. That’s not a shortcut you’re getting away with — it’s how DoGoDev is meant to work: an agent that needs something you haven’t answered yet writes the question down and stops, instead of guessing. You fill in more as the project actually takes shape.</p>
+      </div></div>
+      <div class="walk-step"><div class="walk-num">4</div><div class="walk-body">
         <h3>Open Claude Code here</h3>
         <p>From inside the folder, run <code>claude</code>. It reads your project and the DoGoDev rules automatically.</p>
       </div></div>
-      <div class="walk-step"><div class="walk-num">4</div><div class="walk-body">
+      <div class="walk-step"><div class="walk-num">5</div><div class="walk-body">
         <h3>Start the relay</h3>
         <p>Just say what you want built. Then move it down the line as each stage finishes:</p>
         <div class="term"><div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">In Claude Code</span><button class="copy" type="button">Copy</button></div>
@@ -367,7 +376,7 @@ footer .gloss{margin-top:8px; font-family:var(--font-mono); font-size:.78rem}
 <span class="cmd">Send it to the designer, then the builder.</span></pre></div>
         <p>Each stage appends its work to one file for that task, so the next agent picks up exactly where the last left off.</p>
       </div></div>
-      <div class="walk-step"><div class="walk-num">5</div><div class="walk-body">
+      <div class="walk-step"><div class="walk-num">6</div><div class="walk-body">
         <h3>Save it to the cloud</h3>
         <p>When you’ve got something, push it to GitHub so it’s truly safe. Not sure how? Ask: <em>“help me put this on GitHub.”</em> Claude walks you through it.</p>
       </div></div>
