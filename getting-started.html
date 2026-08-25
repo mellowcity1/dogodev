@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Start with DoGoDev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root{color-scheme:light}
+:root{
+  --bg:#F7F4EF; --surface:#FFFDFA; --sunken:#F1EBE2;
+  --ink:#221D16; --ink-soft:#5B5145; --ink-faint:#8C8071;
+  --border:#E7DDCE; --border-strong:#D8CBB7;
+  --accent:#D9701F; --accent-ink:#9C4E12; --accent-soft:#F7E8D6; --accent-border:#E6C79E;
+  --good:#2F8B4E; --good-soft:#E3F0E5; --good-border:#B5DDBE;
+  --term-bg:#201B15; --term-ink:#ECE4D8; --term-faint:#8E8272; --term-accent:#F0A45A;
+  --shadow:0 1px 2px rgba(60,42,20,.05), 0 6px 20px rgba(60,42,20,.07);
+  --shadow-lift:0 2px 6px rgba(60,42,20,.08), 0 16px 40px rgba(60,42,20,.10);
+  --font-display:'Bricolage Grotesque',system-ui,-apple-system,sans-serif;
+  --font-body:'IBM Plex Sans',system-ui,-apple-system,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,'Cascadia Code',monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#191510; --surface:#221D16; --sunken:#2A241C;
+    --ink:#EFE8DD; --ink-soft:#BAAF9E; --ink-faint:#8A7F6E;
+    --border:#362F25; --border-strong:#453C30;
+    --accent:#EF9A54; --accent-ink:#F2AE6E; --accent-soft:rgba(239,154,84,.13); --accent-border:rgba(239,154,84,.34);
+    --good:#5DBE7A; --good-soft:rgba(93,190,122,.13); --good-border:rgba(93,190,122,.34);
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.36);
+    --shadow-lift:0 2px 6px rgba(0,0,0,.45), 0 20px 46px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#191510; --surface:#221D16; --sunken:#2A241C;
+  --ink:#EFE8DD; --ink-soft:#BAAF9E; --ink-faint:#8A7F6E;
+  --border:#362F25; --border-strong:#453C30;
+  --accent:#EF9A54; --accent-ink:#F2AE6E; --accent-soft:rgba(239,154,84,.13); --accent-border:rgba(239,154,84,.34);
+  --good:#5DBE7A; --good-soft:rgba(93,190,122,.13); --good-border:rgba(93,190,122,.34);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.36);
+  --shadow-lift:0 2px 6px rgba(0,0,0,.45), 0 20px 46px rgba(0,0,0,.5);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-body); font-size:17px; line-height:1.62; -webkit-font-smoothing:antialiased}
+.wrap{max-width:820px; margin:0 auto; padding:0 22px}
+h1,h2,h3{font-family:var(--font-display); font-weight:600; text-wrap:balance; margin:0; line-height:1.12; letter-spacing:-.01em}
+p{margin:0}
+code{font-family:var(--font-mono); font-size:.9em; background:var(--sunken); padding:.08em .35em; border-radius:5px}
+a{color:var(--accent-ink); text-decoration:none; border-bottom:1px solid var(--accent-border)}
+a:hover{border-bottom-color:var(--accent)}
+:focus-visible{outline:2.5px solid var(--accent); outline-offset:2px; border-radius:3px}
+.eyebrow{font-family:var(--font-mono); font-size:.74rem; font-weight:500; letter-spacing:.16em; text-transform:uppercase; color:var(--accent-ink)}
+
+.hero{padding:70px 0 38px}
+.mark{display:inline-flex; align-items:baseline; gap:.06em; font-family:var(--font-display); font-weight:700; font-size:1.15rem; letter-spacing:-.02em; margin-bottom:28px}
+.mark b{color:var(--accent)}
+.mark .spark{font-size:.9em; margin-right:.15em}
+.hero h1{font-size:clamp(2.05rem,5.8vw,3.25rem); font-weight:700; margin:14px 0 0}
+.hero h1 em{font-style:normal; color:var(--accent)}
+.lede{font-size:clamp(1.06rem,2.4vw,1.22rem); color:var(--ink-soft); max-width:60ch; margin:20px 0 0}
+.reassure{margin:24px 0 0; padding:16px 18px; background:var(--accent-soft); border:1px solid var(--accent-border); border-radius:12px; font-size:1rem}
+.reassure b{color:var(--accent-ink)}
+.meta{display:flex; flex-wrap:wrap; gap:10px 22px; margin:26px 0 0; font-family:var(--font-mono); font-size:.82rem; color:var(--ink-faint)}
+.meta span{display:inline-flex; align-items:center; gap:.5em}
+.meta .dot{width:6px; height:6px; border-radius:50%; background:var(--accent)}
+
+section{padding:42px 0}
+.section-head{margin:0 0 24px}
+.section-head h2{font-size:clamp(1.5rem,3.6vw,2rem)}
+.section-head p{color:var(--ink-soft); margin:12px 0 0; max-width:62ch}
+.rule{height:1px; background:var(--border); border:0; margin:0}
+
+.flow{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px}
+.flow-step{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px 15px; box-shadow:var(--shadow)}
+.flow-step .role{font-family:var(--font-mono); font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--accent-ink); display:block; margin-bottom:8px}
+.flow-step h3{font-size:1.02rem; font-weight:600}
+.flow-step p{font-size:.86rem; color:var(--ink-soft); margin:6px 0 0}
+.flow-note{margin:20px 0 0; font-size:.95rem; color:var(--ink-soft); max-width:64ch}
+.flow-note b{color:var(--ink)}
+
+.progress-card{position:sticky; top:0; z-index:5; background:var(--bg); padding:14px 0 14px}
+.progress-row{display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:10px}
+.progress-row strong{font-family:var(--font-display); font-weight:600; font-size:1.02rem}
+.progress-count{font-family:var(--font-mono); font-size:.85rem; color:var(--ink-soft); font-variant-numeric:tabular-nums}
+.progress-count b{color:var(--accent-ink)}
+.bar{height:8px; background:var(--sunken); border-radius:999px; overflow:hidden; border:1px solid var(--border)}
+.bar i{display:block; height:100%; width:0; background:linear-gradient(90deg,var(--accent),var(--accent-ink)); border-radius:999px; transition:width .4s cubic-bezier(.2,.7,.2,1)}
+.list-tools{display:flex; justify-content:flex-end; margin:2px 0 12px}
+.toggle-all{font-family:var(--font-mono); font-size:.76rem; color:var(--ink-faint); background:none; border:1px solid var(--border); border-radius:7px; padding:5px 11px; cursor:pointer}
+.toggle-all:hover{color:var(--ink); border-color:var(--border-strong)}
+
+.steps{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; counter-reset:step}
+.step{background:var(--surface); border:1px solid var(--border); border-radius:13px; box-shadow:var(--shadow); overflow:hidden; transition:border-color .2s, background .2s}
+.step.done{background:var(--good-soft); border-color:var(--good-border)}
+.step-top{display:flex; gap:13px; align-items:center; padding:15px 16px; cursor:pointer; user-select:none}
+.check{flex:none; width:25px; height:25px; border-radius:8px; border:2px solid var(--border-strong); background:var(--surface); display:grid; place-items:center; cursor:pointer; padding:0; transition:all .18s}
+.check svg{width:14px; height:14px; opacity:0; transform:scale(.5); transition:all .18s}
+.step.done .check{background:var(--good); border-color:var(--good)}
+.step.done .check svg{opacity:1; transform:scale(1)}
+.check:hover{border-color:var(--accent)}
+.step-head{flex:1; min-width:0}
+.step-head .n{counter-increment:step; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.1em; color:var(--ink-faint); text-transform:uppercase}
+.step-head .n::before{content:"Step " counter(step)}
+.step.optional .step-head .n::after{content:" · optional"; color:var(--accent-ink)}
+.step-head h3{font-size:1.08rem; font-weight:600; margin:2px 0 0; line-height:1.25}
+.step.done .step-head h3{text-decoration:line-through; text-decoration-color:var(--good); text-decoration-thickness:1.5px; opacity:.7}
+.chev{flex:none; color:var(--ink-faint); font-size:1.5rem; line-height:1; transition:transform .22s cubic-bezier(.2,.7,.2,1); transform:rotate(0deg)}
+.step.open .chev{transform:rotate(90deg); color:var(--accent-ink)}
+.step-body{display:none; padding:2px 18px 20px 54px; border-top:1px solid transparent}
+.step.open .step-body{display:block; animation:drop .22s ease}
+@keyframes drop{from{opacity:0; transform:translateY(-4px)} to{opacity:1; transform:none}}
+.step-body p{color:var(--ink-soft); font-size:.96rem; margin:10px 0 0}
+.step-body p:first-child{margin-top:2px}
+.step-body .why{color:var(--ink); font-size:.95rem}
+.step-body .why b{color:var(--accent-ink)}
+.aside{font-size:.86rem; color:var(--ink-faint); margin-top:10px; padding-left:12px; border-left:2px solid var(--border-strong)}
+
+.term{margin:14px 0 0; background:var(--term-bg); border-radius:10px; border:1px solid #000; overflow:hidden}
+.term-bar{display:flex; align-items:center; justify-content:space-between; padding:7px 12px; border-bottom:1px solid rgba(255,255,255,.07)}
+.term-dots{display:flex; gap:6px}
+.term-dots i{width:10px; height:10px; border-radius:50%; background:#453d33}
+.term-label{font-family:var(--font-mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--term-faint)}
+.copy{font-family:var(--font-mono); font-size:.72rem; color:var(--term-faint); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.09); border-radius:6px; padding:3px 9px; cursor:pointer; transition:all .15s}
+.copy:hover{color:var(--term-ink); background:rgba(255,255,255,.12)}
+.copy.copied{color:#8ee6a6; border-color:rgba(142,230,166,.4)}
+.term pre{margin:0; padding:13px 15px; overflow-x:auto; font-family:var(--font-mono); font-size:.9rem; line-height:1.65; color:var(--term-ink)}
+.term .prompt{color:var(--term-accent); user-select:none}
+.term .cmt{color:var(--term-faint)}
+.verify{margin-top:10px; font-family:var(--font-mono); font-size:.8rem; color:var(--ink-faint)}
+.verify b{color:var(--good)}
+.dl{display:inline-block; margin-top:12px; font-family:var(--font-mono); font-size:.82rem; font-weight:500; color:var(--accent-ink); border:1px solid var(--accent-border); background:var(--accent-soft); border-radius:8px; padding:7px 13px}
+.dl:hover{border-color:var(--accent)}
+
+.walk{display:flex; flex-direction:column}
+.walk-step{display:grid; grid-template-columns:auto 1fr; gap:18px; padding:0 0 26px}
+.walk-num{font-family:var(--font-mono); font-weight:600; font-size:.9rem; color:var(--accent); width:34px; height:34px; border-radius:50%; border:1.5px solid var(--accent-border); display:grid; place-items:center; background:var(--accent-soft); position:relative}
+.walk-step:not(:last-child) .walk-num::after{content:""; position:absolute; top:38px; left:50%; width:1.5px; height:calc(100% - 24px); background:var(--border)}
+.walk-body h3{font-size:1.08rem; font-weight:600}
+.walk-body p{color:var(--ink-soft); font-size:.96rem; margin:6px 0 0}
+
+.closer{background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:34px 30px; box-shadow:var(--shadow-lift)}
+.closer h2{font-size:clamp(1.4rem,3.4vw,1.9rem)}
+.closer p{color:var(--ink-soft); margin:16px 0 0; max-width:60ch}
+.closer p b{color:var(--ink)}
+.closer .say{margin-top:20px; font-family:var(--font-mono); font-size:.92rem; color:var(--accent-ink); background:var(--accent-soft); border:1px solid var(--accent-border); border-radius:10px; padding:12px 15px}
+
+footer{padding:40px 0 60px; border-top:1px solid var(--border); margin-top:44px; color:var(--ink-faint); font-size:.86rem}
+footer .fmark{font-family:var(--font-display); font-weight:700; color:var(--ink); letter-spacing:-.02em}
+footer .fmark b{color:var(--accent)}
+footer .gloss{margin-top:8px; font-family:var(--font-mono); font-size:.78rem}
+
+@media (max-width:560px){
+  body{font-size:16px}
+  .hero{padding:46px 0 28px}
+  .step-body{padding-left:18px}
+  .walk-step{grid-template-columns:1fr; gap:8px}
+  .walk-step:not(:last-child) .walk-num::after{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important; animation:none !important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="mark"><span class="spark">🔥</span>Do<b>Go</b>Dev</div>
+    <p class="eyebrow">Getting started</p>
+    <h1>Build software with Claude — <em>even if you never have</em>.</h1>
+    <p class="lede">DoGoDev is a small, guided way to get from an idea to a running app with Claude Code. This page gets your computer ready, then walks your very first project — one step at a time, nothing assumed.</p>
+    <p class="reassure">If you've ever bounced off developer setup — stared at a terminal, nearly wiped your machine for Linux, or given up and reached for a no-code shortcut just to feel progress — <b>this is the on-ramp built to keep you going.</b> The setup below is the steep part. You only climb it once.</p>
+    <div class="meta">
+      <span><span class="dot"></span>~30–45 min, one time</span>
+      <span><span class="dot"></span>Windows-first (Mac/Linux noted)</span>
+      <span><span class="dot"></span>No experience needed</span>
+    </div>
+  </header>
+
+  <hr class="rule">
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">The idea</p>
+      <h2>You describe it. Five specialists carry it forward.</h2>
+      <p>DoGoDev turns the messy middle of building — “I know what I want, but how does it become a real, running thing?” — into a relay. You talk in plain English; each stage does its job and hands the next a single file, so nothing gets lost between steps.</p>
+    </div>
+    <div class="flow">
+      <div class="flow-step"><span class="role">Analyst</span><h3>Idea &amp; plan</h3><p>What you’re building and why, with clear done-criteria.</p></div>
+      <div class="flow-step"><span class="role">Designer</span><h3>What it looks like</h3><p>Screens and flow, before a line of code.</p></div>
+      <div class="flow-step"><span class="role">Builder</span><h3>Make it</h3><p>Writes the code and runs the tests.</p></div>
+      <div class="flow-step"><span class="role">DBA</span><h3>Data survives</h3><p>The part everyone forgets until the outage.</p></div>
+      <div class="flow-step"><span class="role">Operator</span><h3>Ship &amp; keep it running</h3><p>Deploy, release notes, support.</p></div>
+    </div>
+    <p class="flow-note"><b>That’s the whole DoGoDev flow:</b> workflow diagram → UI design → code → deployment → maintenance. The stages that don’t apply get skipped. You bring the vision and make the calls; the agents are your engineering staff, turning your direction into working software.</p>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <div class="progress-card">
+      <div class="progress-row">
+        <strong>Get your machine ready</strong>
+        <span class="progress-count"><b id="pc-done">0</b> of <span id="pc-total">7</span> done</span>
+      </div>
+      <div class="bar"><i id="bar"></i></div>
+    </div>
+    <div class="section-head" style="margin-top:2px">
+      <p>Here’s the whole checklist at a glance — tap any item to open the how-to. Tick the box on the left as you finish; this page remembers your place. Everything is free.</p>
+    </div>
+    <div class="list-tools"><button class="toggle-all" id="toggleAll" type="button">Expand all</button></div>
+
+    <ol class="steps" id="steps">
+
+      <li class="step" data-id="terminal">
+        <div class="step-top">
+          <button class="check" type="button" aria-label="Mark done"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="step-head"><span class="n"></span><h3>Open your terminal</h3></div>
+          <span class="chev" aria-hidden="true">›</span>
+        </div>
+        <div class="step-body">
+          <p class="why">The terminal is the little window where you type commands — it’s how you’ll run everything below. Nothing to install; you already have one.</p>
+          <p><b>Windows:</b> press Start, type <b>PowerShell</b>, open it. (Later, Claude Code and VS Code each have a terminal built in — same thing.)</p>
+          <p class="aside">Mac: open <b>Terminal</b> (Cmd-Space → “Terminal”). Linux: you know where it is.</p>
+        </div>
+      </li>
+
+      <li class="step" data-id="devfolder">
+        <div class="step-top">
+          <button class="check" type="button" aria-label="Mark done"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="step-head"><span class="n"></span><h3>Make a home for your code at <code>C:\dev</code></h3></div>
+          <span class="chev" aria-hidden="true">›</span>
+        </div>
+        <div class="step-body">
+          <p class="why">Create one folder at the <b>root of your C: drive</b> and keep every project inside it. <b>Why it matters:</b> Windows quietly syncs your Desktop and Documents to OneDrive — and code living there gets synced, file-locked, and duplicated mid-build. It’s a genuine source of pain and lost work. A plain folder off <code>C:\</code> stays fast, local, and out of OneDrive’s reach.</p>
+          <div class="term">
+            <div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">PowerShell</span><button class="copy" type="button">Copy</button></div>
+            <pre><span class="prompt">PS&gt; </span><span class="cmd">mkdir C:\dev</span></pre>
+          </div>
+          <p>Every project gets its own folder inside it — e.g. <code>C:\dev\my-first-app</code>. That’s where your work truly lives.</p>
+          <p class="aside">Mac/Linux: <code>mkdir ~/dev</code> — same idea, a plain folder in your home directory.</p>
+        </div>
+      </li>
+
+      <li class="step" data-id="node">
+        <div class="step-top">
+          <button class="check" type="button" aria-label="Mark done"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="step-head"><span class="n"></span><h3>Install Node.js (version 22.5 or newer)</h3></div>
+          <span class="chev" aria-hidden="true">›</span>
+        </div>
+        <div class="step-body">
+          <p class="why">Node is the engine that runs your app’s code outside a web browser. DoGoDev’s starter uses newer built-in features, so you need <b>22.5 or higher</b>.</p>
+          <p>Download the Windows installer, run it, and click through the defaults.</p>
+          <a class="dl" href="https://nodejs.org/en/download" target="_blank" rel="noopener">Download Node.js →</a>
+          <div class="term">
+            <div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">Verify</span><button class="copy" type="button">Copy</button></div>
+            <pre><span class="prompt">PS&gt; </span><span class="cmd">node --version</span></pre>
+          </div>
+          <p class="verify">Should print <b>v22.5.0</b> or higher. If it errors, close and reopen the terminal first.</p>
+        </div>
+      </li>
+
+      <li class="step" data-id="git">
+        <div class="step-top">
+          <button class="check" type="button" aria-label="Mark done"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="step-head"><span class="n"></span><h3>Install Git</h3></div>
+          <span class="chev" aria-hidden="true">›</span>
+        </div>
+        <div class="step-body">
+          <p class="why">Git keeps a full history of your work and is how you back it up to the cloud. Get the “Git for Windows” installer and accept the defaults.</p>
+          <a class="dl" href="https://git-scm.com/downloads" target="_blank" rel="noopener">Download Git →</a>
+          <div class="term">
+            <div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">Verify</span><button class="copy" type="button">Copy</button></div>
+            <pre><span class="prompt">PS&gt; </span><span class="cmd">git --version</span></pre>
+          </div>
+          <p class="verify">Any version number means you’re set.</p>
+        </div>
+      </li>
+
+      <li class="step" data-id="github">
+        <div class="step-top">
+          <button class="check" type="button" aria-label="Mark done"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="step-head"><span class="n"></span><h3>Create a free GitHub account</h3></div>
+          <span class="chev" aria-hidden="true">›</span>
+        </div>
+        <div class="step-body">
+          <p class="why">GitHub is your code’s home and backup in the cloud. Strongly recommended. Here’s the part nobody tells you: saving your work on your computer (a “commit”) is <b>not</b> the same as backing it up — <b>“pushing” to GitHub is what actually protects it.</b> A project can be one push away from vanishing if a laptop dies.</p>
+          <p><b>Cost:</b> free for everything you’ll do starting out — private projects included. You’d only pay if your usage balloons (large teams, heavy automation, lots of storage).</p>
+          <a class="dl" href="https://github.com/signup" target="_blank" rel="noopener">Sign up for GitHub →</a>
+          <p class="aside">Connecting it so pushing is painless (an “SSH key”) is a 5-minute setup — just ask Claude to walk you through it when you’re ready.</p>
+        </div>
+      </li>
+
+      <li class="step" data-id="claude">
+        <div class="step-top">
+          <button class="check" type="button" aria-label="Mark done"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="step-head"><span class="n"></span><h3>Install Claude Code &amp; sign in</h3></div>
+          <span class="chev" aria-hidden="true">›</span>
+        </div>
+        <div class="step-body">
+          <p class="why">Claude Code is the tool that runs the DoGoDev agents and does the building alongside you. Install it from the official page and sign in with your Anthropic account (a Claude subscription or API access).</p>
+          <a class="dl" href="https://claude.com/claude-code" target="_blank" rel="noopener">Get Claude Code →</a>
+          <div class="term">
+            <div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">Start it</span><button class="copy" type="button">Copy</button></div>
+            <pre><span class="prompt">PS&gt; </span><span class="cmd">claude</span></pre>
+          </div>
+          <p class="verify">It should launch and ask you to sign in the first time.</p>
+        </div>
+      </li>
+
+      <li class="step optional" data-id="vscode">
+        <div class="step-top">
+          <button class="check" type="button" aria-label="Mark done"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="step-head"><span class="n"></span><h3>Install VS Code — a friendly editor</h3></div>
+          <span class="chev" aria-hidden="true">›</span>
+        </div>
+        <div class="step-body">
+          <p class="why">Optional, but nice: VS Code is a free, approachable place to <em>see</em> your files while Claude does the editing. It also has a built-in terminal, so everything lives in one window.</p>
+          <a class="dl" href="https://code.visualstudio.com/download" target="_blank" rel="noopener">Download VS Code →</a>
+        </div>
+      </li>
+
+    </ol>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Your first project</p>
+      <h2>From empty folder to a running start</h2>
+      <p>Setup done? Here’s the whole loop, start to finish. You’re talking to Claude in plain English the entire time.</p>
+    </div>
+    <div class="walk">
+      <div class="walk-step"><div class="walk-num">1</div><div class="walk-body">
+        <h3>Make the project folder</h3>
+        <p>In your terminal, create and enter a fresh folder inside <code>C:\dev</code>, then start version history:</p>
+        <div class="term"><div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">PowerShell</span><button class="copy" type="button">Copy</button></div>
+          <pre><span class="prompt">PS&gt; </span><span class="cmd">mkdir C:\dev\my-first-app</span>
+<span class="prompt">PS&gt; </span><span class="cmd">cd C:\dev\my-first-app</span>
+<span class="prompt">PS&gt; </span><span class="cmd">git init</span></pre></div>
+      </div></div>
+      <div class="walk-step"><div class="walk-num">2</div><div class="walk-body">
+        <h3>Add the DoGoDev suite</h3>
+        <p>Drop the DoGoDev <code>.claude</code> folder into your project — that’s the five agents and the pipeline. (A one-line installer is coming; for now you copy the folder in.)</p>
+      </div></div>
+      <div class="walk-step"><div class="walk-num">3</div><div class="walk-body">
+        <h3>Open Claude Code here</h3>
+        <p>From inside the folder, run <code>claude</code>. It reads your project and the DoGoDev rules automatically.</p>
+      </div></div>
+      <div class="walk-step"><div class="walk-num">4</div><div class="walk-body">
+        <h3>Start the relay</h3>
+        <p>Just say what you want built. Then move it down the line as each stage finishes:</p>
+        <div class="term"><div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">In Claude Code</span><button class="copy" type="button">Copy</button></div>
+          <pre><span class="cmt"># plain English — no special syntax</span>
+<span class="cmd">Have the analyst open a work item for a to-do list app.</span>
+<span class="cmd">Send it to the designer, then the builder.</span></pre></div>
+        <p>Each stage appends its work to one file for that task, so the next agent picks up exactly where the last left off.</p>
+      </div></div>
+      <div class="walk-step"><div class="walk-num">5</div><div class="walk-body">
+        <h3>Save it to the cloud</h3>
+        <p>When you’ve got something, push it to GitHub so it’s truly safe. Not sure how? Ask: <em>“help me put this on GitHub.”</em> Claude walks you through it.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <div class="wrap" style="padding:0">
+    <div class="closer">
+      <h2>Getting stuck is normal — it’s the whole reason this exists.</h2>
+      <p>Every experienced builder has stared at an error and considered quitting. The difference isn’t talent; it’s having a way through. <b>You don’t need to switch to Linux. You don’t need to abandon this for something “easier.”</b> When something breaks, describe it in plain words — Claude reads your project and the DoGoDev rules and gets you moving again.</p>
+      <p class="say">Stuck? Type exactly what happened: “I ran <code>node --version</code> and it said command not found.” That’s enough to get help.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="fmark"><span aria-hidden="true">🔥</span> Do<b>Go</b>Dev</div>
+    <p>Small, guided dev tooling for building with Claude.</p>
+    <p class="gloss">dogo — Swahili for <em>small</em>. Part of the dogomoto family. · Draft front door, v0.2</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var KEY='dogodev-start-v1';
+  var steps=[].slice.call(document.querySelectorAll('.step'));
+  var total=steps.length;
+  var pcTotal=document.getElementById('pc-total');
+  var pcDone=document.getElementById('pc-done');
+  var bar=document.getElementById('bar');
+  var toggleAll=document.getElementById('toggleAll');
+  if(pcTotal) pcTotal.textContent=total;
+
+  var saved={};
+  try{ saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ saved={}; }
+
+  function render(){
+    var done=0; steps.forEach(function(s){ if(s.classList.contains('done')) done++; });
+    if(pcDone) pcDone.textContent=done;
+    if(bar) bar.style.width=(total? (done/total*100):0)+'%';
+  }
+  function persist(){
+    var o={}; steps.forEach(function(s){ o[s.getAttribute('data-id')]=s.classList.contains('done'); });
+    try{ localStorage.setItem(KEY, JSON.stringify(o)); }catch(e){}
+  }
+  function setOpen(s,open){
+    s.classList.toggle('open',open);
+    s.querySelector('.step-top').setAttribute('aria-expanded', open?'true':'false');
+  }
+  function syncToggleAllLabel(){
+    var anyClosed=steps.some(function(s){ return !s.classList.contains('open'); });
+    toggleAll.textContent=anyClosed?'Expand all':'Collapse all';
+  }
+
+  steps.forEach(function(s){
+    var id=s.getAttribute('data-id');
+    if(saved[id]) s.classList.add('done');
+    var top=s.querySelector('.step-top');
+    var check=s.querySelector('.check');
+    top.setAttribute('role','button');
+    top.setAttribute('tabindex','0');
+    setOpen(s,false);
+    top.addEventListener('click', function(e){ if(e.target.closest('.check')) return; setOpen(s,!s.classList.contains('open')); syncToggleAllLabel(); });
+    top.addEventListener('keydown', function(e){ if(e.target.closest('.check')) return; if(e.key===' '||e.key==='Enter'){ e.preventDefault(); setOpen(s,!s.classList.contains('open')); syncToggleAllLabel(); } });
+    check.setAttribute('aria-pressed', s.classList.contains('done')?'true':'false');
+    check.addEventListener('click', function(e){ e.stopPropagation(); s.classList.toggle('done'); check.setAttribute('aria-pressed', s.classList.contains('done')?'true':'false'); render(); persist(); });
+  });
+  if(steps[0]) setOpen(steps[0],true);
+  render(); syncToggleAllLabel();
+
+  toggleAll.addEventListener('click', function(){
+    var anyClosed=steps.some(function(s){ return !s.classList.contains('open'); });
+    steps.forEach(function(s){ setOpen(s,anyClosed); });
+    syncToggleAllLabel();
+  });
+
+  [].slice.call(document.querySelectorAll('.copy')).forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var pre=btn.closest('.term').querySelector('pre');
+      var cmds=[].slice.call(pre.querySelectorAll('.cmd')).map(function(c){return c.textContent;}).join('\n');
+      var text=cmds||pre.textContent;
+      var done=function(){ btn.textContent='Copied'; btn.classList.add('copied'); setTimeout(function(){ btn.textContent='Copy'; btn.classList.remove('copied'); },1400); };
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(done).catch(done); }
+      else{ done(); }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
