@@ -22,10 +22,28 @@ this repo.*
 
 ## Install into your project
 
-1. Copy the **`.claude/`** folder and **`CLAUDE.md`** into the root of your repo.
+1. From the root of your repo, copy in the **`.claude/`** folder and **`CLAUDE.md`**:
+
+   PowerShell (Windows):
+   ```powershell
+   git clone --depth 1 https://github.com/mellowcity1/dogodev.git $env:TEMP\dogodev-src
+   Copy-Item $env:TEMP\dogodev-src\.claude . -Recurse
+   Copy-Item $env:TEMP\dogodev-src\CLAUDE.md .
+   Remove-Item $env:TEMP\dogodev-src -Recurse -Force
+   ```
+
+   Mac/Linux:
+   ```bash
+   git clone --depth 1 https://github.com/mellowcity1/dogodev.git /tmp/dogodev-src
+   cp -r /tmp/dogodev-src/.claude . && cp /tmp/dogodev-src/CLAUDE.md .
+   rm -rf /tmp/dogodev-src
+   ```
+
 2. Open `CLAUDE.md` and fill in the **“Your project’s house rules”** section — your stack, where
    things live, the test command, how you ship. *This is what makes the agents fit your code.*
-3. Open Claude Code in the repo and start the relay:
+3. Open Claude Code in the repo and type **`/setup-check`** — Claude verifies Node, Git, your git
+   identity, and that the suite landed correctly, and reports the exact fix for anything off.
+4. Start the relay:
    > Have the analyst open a work item for &lt;your idea&gt;.
 
 ## How work moves

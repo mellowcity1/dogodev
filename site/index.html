@@ -353,6 +353,7 @@ footer .gloss{margin-top:8px; font-family:var(--font-mono); font-size:.78rem}
 <span class="prompt">PS&gt; </span><span class="cmd">Copy-Item $env:TEMP\dogodev-src\CLAUDE.md .</span>
 <span class="prompt">PS&gt; </span><span class="cmd">Remove-Item $env:TEMP\dogodev-src -Recurse -Force</span></pre></div>
         <p class="aside">This downloads DoGoDev to a temp folder, copies just the <code>.claude</code> folder and <code>CLAUDE.md</code> into your project, then deletes the temp copy — your project doesn't end up with DoGoDev's own git history in it.</p>
+        <p class="aside">Mac/Linux, same idea: <code>git clone --depth 1 https://github.com/mellowcity1/dogodev.git /tmp/dogodev-src &amp;&amp; cp -r /tmp/dogodev-src/.claude . &amp;&amp; cp /tmp/dogodev-src/CLAUDE.md . &amp;&amp; rm -rf /tmp/dogodev-src</code></p>
       </div></div>
       <div class="walk-step"><div class="walk-num">3</div><div class="walk-body">
         <h3>Tell it about your project</h3>
@@ -368,6 +369,13 @@ The covenant: keep it simple — no paid services, nothing that needs an account
         <p>From inside the folder, run <code>claude</code>. It reads your project and the DoGoDev rules automatically.</p>
       </div></div>
       <div class="walk-step"><div class="walk-num">5</div><div class="walk-body">
+        <h3>Let Claude check your setup</h3>
+        <p>Before building anything, have Claude verify the machine itself. Type:</p>
+        <div class="term"><div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">In Claude Code</span><button class="copy" type="button">Copy</button></div>
+          <pre><span class="cmd">/setup-check</span></pre></div>
+        <p>Claude runs through everything on this page — Node version, Git, whether Git knows your name yet (the most common silent trap on a fresh machine), whether the DoGoDev suite landed, whether <code>CLAUDE.md</code> got filled in — and reports back in plain language with the exact fix for anything that's off. It ships with the suite you copied in step 2.</p>
+      </div></div>
+      <div class="walk-step"><div class="walk-num">6</div><div class="walk-body">
         <h3>Start the relay</h3>
         <p>Just say what you want built. Then move it down the line as each stage finishes:</p>
         <div class="term"><div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">In Claude Code</span><button class="copy" type="button">Copy</button></div>
@@ -376,7 +384,7 @@ The covenant: keep it simple — no paid services, nothing that needs an account
 <span class="cmd">Send it to the designer, then the builder.</span></pre></div>
         <p>Each stage appends its work to one file for that task, so the next agent picks up exactly where the last left off.</p>
       </div></div>
-      <div class="walk-step"><div class="walk-num">6</div><div class="walk-body">
+      <div class="walk-step"><div class="walk-num">7</div><div class="walk-body">
         <h3>Save it to the cloud</h3>
         <p>When you’ve got something, push it to GitHub so it’s truly safe. Not sure how? Ask: <em>“help me put this on GitHub.”</em> Claude walks you through it.</p>
       </div></div>
@@ -394,7 +402,7 @@ The covenant: keep it simple — no paid services, nothing that needs an account
   <footer>
     <div class="fmark"><span aria-hidden="true">🔥</span> Do<b>Go</b>Dev</div>
     <p>Small, guided dev tooling for building with Claude.</p>
-    <p class="gloss">dogo — Swahili for <em>small</em>. Part of the dogomoto family. · Draft front door, v0.2</p>
+    <p class="gloss">dogo — Swahili for <em>small</em>. Part of the dogomoto family. · Draft front door, v0.3</p>
   </footer>
 
 </div>

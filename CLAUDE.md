@@ -17,7 +17,8 @@ operator) that move work through a file-based pipeline. The full method is in
 ## Standing docs — read before acting
 
 <!-- List the docs that define this project so every agent grounds in them. Trim/extend freely. -->
-- `README.md` — what this project is and its core rules.
+- `README.md` — what this project is and its core rules. (Brand-new project with no README yet?
+  That's fine — a listed doc that doesn't exist yet is a note to create it, not a blocker.)
 
 ---
 
