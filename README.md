@@ -50,7 +50,7 @@ DoGoDev’s rigor lives in **`CLAUDE.md`** — loaded every session, reliable on
 *additionally* enforce rules with Claude Code hooks (auto-run tests after edits, block a stray
 dependency). One caveat worth knowing: **hook commands aren’t cross-platform out of the box** — a
 bash script fails on Windows without Git Bash — so hooks are an **opt-in** layer here, not a
-default. Notes and examples: `docs/hooks.md` *(coming with v0.2)*.
+default. Notes and two tested, ready-to-copy examples: [`docs/hooks.md`](docs/hooks.md).
 
 ## Status
 
