@@ -345,7 +345,13 @@ footer .gloss{margin-top:8px; font-family:var(--font-mono); font-size:.78rem}
       </div></div>
       <div class="walk-step"><div class="walk-num">2</div><div class="walk-body">
         <h3>Add the DoGoDev suite</h3>
-        <p>Drop the DoGoDev <code>.claude</code> folder into your project — that’s the five agents and the pipeline. (A one-line installer is coming; for now you copy the folder in.)</p>
+        <p>Pull in the five agents and the pipeline — run this from inside the folder you just made:</p>
+        <div class="term"><div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">PowerShell</span><button class="copy" type="button">Copy</button></div>
+          <pre><span class="prompt">PS&gt; </span><span class="cmd">git clone --depth 1 https://github.com/mellowcity1/dogodev.git $env:TEMP\dogodev-src</span>
+<span class="prompt">PS&gt; </span><span class="cmd">Copy-Item $env:TEMP\dogodev-src\.claude . -Recurse</span>
+<span class="prompt">PS&gt; </span><span class="cmd">Copy-Item $env:TEMP\dogodev-src\CLAUDE.md .</span>
+<span class="prompt">PS&gt; </span><span class="cmd">Remove-Item $env:TEMP\dogodev-src -Recurse -Force</span></pre></div>
+        <p class="aside">This downloads DoGoDev to a temp folder, copies just the <code>.claude</code> folder and <code>CLAUDE.md</code> into your project, then deletes the temp copy — your project doesn't end up with DoGoDev's own git history in it.</p>
       </div></div>
       <div class="walk-step"><div class="walk-num">3</div><div class="walk-body">
         <h3>Open Claude Code here</h3>
