@@ -209,7 +209,7 @@ footer .gloss{margin-top:8px; font-family:var(--font-mono); font-size:.78rem}
       <div class="bar"><i id="bar"></i></div>
     </div>
     <div class="section-head" style="margin-top:2px">
-      <p>Here’s the whole checklist at a glance — tap any item to open the how-to. Tick the box on the left as you finish; this page remembers your place. Every tool here is free to install — Claude Code itself has a real cost past a quick trial, noted on its own step below.</p>
+      <p>Here’s the whole checklist at a glance — tap any item to open the how-to. Tick the box on the left as you finish; this page remembers your place. Everything here is free except one — Claude Code needs a paid plan, covered on its own step below.</p>
     </div>
     <div class="list-tools"><button class="toggle-all" id="toggleAll" type="button">Expand all</button></div>
 
@@ -301,14 +301,19 @@ footer .gloss{margin-top:8px; font-family:var(--font-mono); font-size:.78rem}
           <span class="chev" aria-hidden="true">›</span>
         </div>
         <div class="step-body">
-          <p class="why">Claude Code is the tool that runs the DoGoDev agents and does the building alongside you. Install it from the official page and sign in with your Anthropic account (a Claude subscription or API access).</p>
-          <p><b>Cost:</b> the Free plan technically includes Claude Code, but at roughly half the weekly usage of a paid plan — real project work burns through that fast, and Claude Code will start nudging you to upgrade. Budget for <b>Pro (~$20/mo)</b> once you’re doing more than a quick trial; heavier daily use is what Max (from ~$100/mo) is for. Check <a href="https://claude.com/pricing" target="_blank" rel="noopener">claude.com/pricing</a> for current numbers — they change.</p>
-          <a class="dl" href="https://claude.com/claude-code" target="_blank" rel="noopener">Get Claude Code →</a>
+          <p class="why">Claude Code is the tool that runs the DoGoDev agents and does the building alongside you. It lives in the terminal — one command installs it, then you sign in with your Anthropic account.</p>
+          <p><b>Cost:</b> this is the one tool on this page that isn’t free. Claude Code needs a paid plan — <b>Pro (~$20/mo)</b> covers getting started; heavy daily building is what Max (from ~$100/mo) is for. The free claude.ai plan does <em>not</em> include Claude Code. Check <a href="https://claude.com/pricing" target="_blank" rel="noopener">claude.com/pricing</a> for current numbers — they change.</p>
           <div class="term">
-            <div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">Start it</span><button class="copy" type="button">Copy</button></div>
-            <pre><span class="prompt">PS&gt; </span><span class="cmd">claude</span></pre>
+            <div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">PowerShell</span><button class="copy" type="button">Copy</button></div>
+            <pre><span class="prompt">PS&gt; </span><span class="cmd">irm https://claude.ai/install.ps1 | iex</span></pre>
           </div>
-          <p class="verify">It should launch and ask you to sign in the first time.</p>
+          <p class="aside">Mac/Linux: <code>curl -fsSL https://claude.ai/install.sh | bash</code></p>
+          <div class="term">
+            <div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">Verify</span><button class="copy" type="button">Copy</button></div>
+            <pre><span class="prompt">PS&gt; </span><span class="cmd">claude --version</span></pre>
+          </div>
+          <p class="verify">Open a NEW terminal first, then run it — a version number means you’re set. Then run <b>claude</b> to sign in the first time.</p>
+          <p class="aside">Already use the Claude <em>desktop app</em>? That’s a separate install — it doesn’t give your terminal the <code>claude</code> command. You still need the install command above. (We learned this the hard way, on a machine that uses the app every day.)</p>
         </div>
       </li>
 
@@ -367,6 +372,7 @@ The covenant: keep it simple — no paid services, nothing that needs an account
       <div class="walk-step"><div class="walk-num">4</div><div class="walk-body">
         <h3>Open Claude Code here</h3>
         <p>From inside the folder, run <code>claude</code>. It reads your project and the DoGoDev rules automatically.</p>
+        <p class="aside">“<code>claude</code> is not recognized”? Revisit the checklist’s Claude Code step — the install command hasn’t run, or you need a fresh terminal window.</p>
       </div></div>
       <div class="walk-step"><div class="walk-num">5</div><div class="walk-body">
         <h3>Let Claude check your setup</h3>
@@ -374,6 +380,7 @@ The covenant: keep it simple — no paid services, nothing that needs an account
         <div class="term"><div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">In Claude Code</span><button class="copy" type="button">Copy</button></div>
           <pre><span class="cmd">/setup-check</span></pre></div>
         <p>Claude runs through everything on this page — Node version, Git, whether Git knows your name yet (the most common silent trap on a fresh machine), whether the DoGoDev suite landed, whether <code>CLAUDE.md</code> got filled in — and reports back in plain language with the exact fix for anything that's off. It ships with the suite you copied in step 2.</p>
+        <p class="aside">Type it inside Claude Code, not VS Code — the command is a file Claude reads, not a program your editor can run. (VS Code will offer a confusing “Markdown extension” prompt if you try to run it there.)</p>
       </div></div>
       <div class="walk-step"><div class="walk-num">6</div><div class="walk-body">
         <h3>Start the relay</h3>
