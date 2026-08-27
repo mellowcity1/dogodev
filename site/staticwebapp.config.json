@@ -3,5 +3,8 @@
   "globalHeaders": {
     "X-Content-Type-Options": "nosniff",
     "Referrer-Policy": "strict-origin-when-cross-origin"
+  },
+  "mimeTypes": {
+    ".ps1": "text/plain; charset=utf-8"
   }
 }

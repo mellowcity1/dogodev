@@ -210,7 +210,7 @@ footer .gloss{margin-top:8px; font-family:var(--font-mono); font-size:.78rem}
       <div class="bar"><i id="bar"></i></div>
     </div>
     <div class="section-head" style="margin-top:2px">
-      <p><b>Four steps</b> and your machine is ready to build. Tap any item to open the how-to; tick the box on the left as you finish — this page remembers your place. Everything here is free except one — Claude Code needs a paid plan, covered on its own step below. (GitHub and VS Code? They can wait — see “When you’re ready,” further down.)</p>
+      <p><b>Four steps</b> and your machine is ready to build. Tap any item to open the how-to; tick the box on the left as you finish — this page remembers your place. Everything here is free except one — Claude Code needs a paid plan, covered on its own step below. (GitHub and VS Code? They can wait — see “When you’re ready,” further down.) In a hurry? The one-command start in “Your first project” below re-checks all four and guides any you’re missing.</p>
     </div>
     <div class="list-tools"><button class="toggle-all" id="toggleAll" type="button">Expand all</button></div>
 
@@ -306,8 +306,12 @@ footer .gloss{margin-top:8px; font-family:var(--font-mono); font-size:.78rem}
     <div class="walk">
       <div class="walk-step"><div class="walk-num">1</div><div class="walk-body">
         <h3>Create your project and drop in DoGoDev</h3>
-        <p>One paste does it all: make the project folder inside <code>C:\dev</code>, start version history, and pull in the five agents and the pipeline. Change <code>my-first-app</code> to your project’s name first:</p>
+        <p>One command does it: it re-checks your four tools (guiding you through any that are missing — always from the official source, always asking first), creates the project folder, starts version history, and drops in the suite:</p>
         <div class="term"><div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">PowerShell</span><button class="copy" type="button">Copy</button></div>
+          <pre><span class="prompt">PS&gt; </span><span class="cmd">irm https://dogodev.com/new.ps1 | iex</span></pre></div>
+        <p class="aside">Cautious about piping a script from the internet? Good instinct. It’s short and readable — <a href="/new.ps1" target="_blank" rel="noopener">open dogodev.com/new.ps1</a> and see exactly what it does first. It hosts nothing, installs nothing without your yes, and every download comes from its vendor’s official source.</p>
+        <p class="aside">Prefer every move by hand? The same thing, seven commands (change <code>my-first-app</code> first):</p>
+        <div class="term"><div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">PowerShell — by hand</span><button class="copy" type="button">Copy</button></div>
           <pre><span class="prompt">PS&gt; </span><span class="cmd">mkdir C:\dev\my-first-app</span>
 <span class="prompt">PS&gt; </span><span class="cmd">cd C:\dev\my-first-app</span>
 <span class="prompt">PS&gt; </span><span class="cmd">git init</span>
@@ -315,8 +319,7 @@ footer .gloss{margin-top:8px; font-family:var(--font-mono); font-size:.78rem}
 <span class="prompt">PS&gt; </span><span class="cmd">Copy-Item $env:TEMP\dogodev-src\.claude . -Recurse</span>
 <span class="prompt">PS&gt; </span><span class="cmd">Copy-Item $env:TEMP\dogodev-src\CLAUDE.md .</span>
 <span class="prompt">PS&gt; </span><span class="cmd">Remove-Item $env:TEMP\dogodev-src -Recurse -Force</span></pre></div>
-        <p class="aside">What it does: new folder, git history started, then DoGoDev downloads to a temp folder, just the <code>.claude</code> folder and <code>CLAUDE.md</code> copy in, and the temp copy is deleted — your project doesn't end up with DoGoDev's own git history in it.</p>
-        <p class="aside">Mac/Linux, same idea: <code>mkdir -p ~/dev/my-first-app &amp;&amp; cd ~/dev/my-first-app &amp;&amp; git init &amp;&amp; git clone --depth 1 https://github.com/mellowcity1/dogodev.git /tmp/dogodev-src &amp;&amp; cp -r /tmp/dogodev-src/.claude . &amp;&amp; cp /tmp/dogodev-src/CLAUDE.md . &amp;&amp; rm -rf /tmp/dogodev-src</code></p>
+        <p class="aside">Mac/Linux (by hand — the one-command script is Windows-only for now): <code>mkdir -p ~/dev/my-first-app &amp;&amp; cd ~/dev/my-first-app &amp;&amp; git init &amp;&amp; git clone --depth 1 https://github.com/mellowcity1/dogodev.git /tmp/dogodev-src &amp;&amp; cp -r /tmp/dogodev-src/.claude . &amp;&amp; cp /tmp/dogodev-src/CLAUDE.md . &amp;&amp; rm -rf /tmp/dogodev-src</code></p>
       </div></div>
       <div class="walk-step"><div class="walk-num">2</div><div class="walk-body">
         <h3>Tell it about your project</h3>
@@ -402,7 +405,7 @@ The covenant: keep it simple — no paid services, nothing that needs an account
   <footer>
     <div class="fmark"><span aria-hidden="true">🔥</span> Do<b>Go</b>Dev</div>
     <p>Small, guided dev tooling for building with Claude.</p>
-    <p class="gloss">dogo — Swahili for <em>small</em>. Part of the dogomoto family. · Draft front door, v0.4</p>
+    <p class="gloss">dogo — Swahili for <em>small</em>. Part of the dogomoto family. · Draft front door, v0.5</p>
   </footer>
 
 </div>

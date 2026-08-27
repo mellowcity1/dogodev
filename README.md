@@ -22,6 +22,15 @@ this repo.*
 
 ## Install into your project
 
+**Windows, one command** (checks your tools, guides missing installs from official sources, scaffolds
+the project — read it first at [dogodev.com/new.ps1](https://dogodev.com/new.ps1)):
+
+```powershell
+irm https://dogodev.com/new.ps1 | iex
+```
+
+Or by hand:
+
 1. From the root of your repo, copy in the **`.claude/`** folder and **`CLAUDE.md`**:
 
    PowerShell (Windows):
