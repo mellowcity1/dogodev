@@ -107,6 +107,7 @@ section{padding:42px 0}
 .step-head .n{counter-increment:step; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.1em; color:var(--ink-faint); text-transform:uppercase}
 .step-head .n::before{content:"Step " counter(step)}
 .step.optional .step-head .n::after{content:" · optional"; color:var(--accent-ink)}
+#steps-later .step-head .n::before{content:"When you’re ready"}
 .step-head h3{font-size:1.08rem; font-weight:600; margin:2px 0 0; line-height:1.25}
 .step.done .step-head h3{text-decoration:line-through; text-decoration-color:var(--good); text-decoration-thickness:1.5px; opacity:.7}
 .chev{flex:none; color:var(--ink-faint); font-size:1.5rem; line-height:1; transition:transform .22s cubic-bezier(.2,.7,.2,1); transform:rotate(0deg)}
@@ -209,39 +210,27 @@ footer .gloss{margin-top:8px; font-family:var(--font-mono); font-size:.78rem}
       <div class="bar"><i id="bar"></i></div>
     </div>
     <div class="section-head" style="margin-top:2px">
-      <p>Here’s the whole checklist at a glance — tap any item to open the how-to. Tick the box on the left as you finish; this page remembers your place. Everything here is free except one — Claude Code needs a paid plan, covered on its own step below.</p>
+      <p><b>Four steps</b> and your machine is ready to build. Tap any item to open the how-to; tick the box on the left as you finish — this page remembers your place. Everything here is free except one — Claude Code needs a paid plan, covered on its own step below. (GitHub and VS Code? They can wait — see “When you’re ready,” further down.)</p>
     </div>
     <div class="list-tools"><button class="toggle-all" id="toggleAll" type="button">Expand all</button></div>
 
     <ol class="steps" id="steps">
 
-      <li class="step" data-id="terminal">
+      <li class="step" data-id="terminal-home">
         <div class="step-top">
           <button class="check" type="button" aria-label="Mark done"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <div class="step-head"><span class="n"></span><h3>Open your terminal</h3></div>
+          <div class="step-head"><span class="n"></span><h3>Open your terminal &amp; make a home for your code</h3></div>
           <span class="chev" aria-hidden="true">›</span>
         </div>
         <div class="step-body">
-          <p class="why">The terminal is the little window where you type commands — it’s how you’ll run everything below. Nothing to install; you already have one.</p>
-          <p><b>Windows:</b> press Start, type <b>PowerShell</b>, open it. (Later, Claude Code and VS Code each have a terminal built in — same thing.)</p>
-          <p class="aside">Mac: open <b>Terminal</b> (Cmd-Space → “Terminal”). Linux: you know where it is.</p>
-        </div>
-      </li>
-
-      <li class="step" data-id="devfolder">
-        <div class="step-top">
-          <button class="check" type="button" aria-label="Mark done"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <div class="step-head"><span class="n"></span><h3>Make a home for your code at <code>C:\dev</code></h3></div>
-          <span class="chev" aria-hidden="true">›</span>
-        </div>
-        <div class="step-body">
-          <p class="why">Create one folder at the <b>root of your C: drive</b> and keep every project inside it. <b>Why it matters:</b> Windows quietly syncs your Desktop and Documents to OneDrive — and code living there gets synced, file-locked, and duplicated mid-build. It’s a genuine source of pain and lost work. A plain folder off <code>C:\</code> stays fast, local, and out of OneDrive’s reach.</p>
+          <p class="why">The terminal is the little window where you type commands — it’s how you’ll run everything below. Nothing to install; you already have one. <b>Windows:</b> press Start, type <b>PowerShell</b>, open it.</p>
+          <p>First command: one folder at the <b>root of your C: drive</b>, where every project will live. <b>Why there:</b> Windows quietly syncs your Desktop and Documents to OneDrive — and code living there gets synced, file-locked, and duplicated mid-build. A plain folder off <code>C:\</code> stays fast, local, and out of OneDrive’s reach.</p>
           <div class="term">
             <div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">PowerShell</span><button class="copy" type="button">Copy</button></div>
             <pre><span class="prompt">PS&gt; </span><span class="cmd">mkdir C:\dev</span></pre>
           </div>
           <p>Every project gets its own folder inside it — e.g. <code>C:\dev\my-first-app</code>. That’s where your work truly lives.</p>
-          <p class="aside">Mac/Linux: <code>mkdir ~/dev</code> — same idea, a plain folder in your home directory.</p>
+          <p class="aside">Mac: open <b>Terminal</b> (Cmd-Space → “Terminal”), then <code>mkdir ~/dev</code> — same idea, a plain folder in your home directory. Linux: you know where it is.</p>
         </div>
       </li>
 
@@ -280,20 +269,6 @@ footer .gloss{margin-top:8px; font-family:var(--font-mono); font-size:.78rem}
         </div>
       </li>
 
-      <li class="step" data-id="github">
-        <div class="step-top">
-          <button class="check" type="button" aria-label="Mark done"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <div class="step-head"><span class="n"></span><h3>Create a free GitHub account</h3></div>
-          <span class="chev" aria-hidden="true">›</span>
-        </div>
-        <div class="step-body">
-          <p class="why">GitHub is your code’s home and backup in the cloud. Strongly recommended. Here’s the part nobody tells you: saving your work on your computer (a “commit”) is <b>not</b> the same as backing it up — <b>“pushing” to GitHub is what actually protects it.</b> A project can be one push away from vanishing if a laptop dies.</p>
-          <p><b>Cost:</b> free for everything you’ll do starting out — private projects included. You’d only pay if your usage balloons (large teams, heavy automation, lots of storage).</p>
-          <a class="dl" href="https://github.com/signup" target="_blank" rel="noopener">Sign up for GitHub →</a>
-          <p class="aside">Connecting it so pushing is painless (an “SSH key”) is a 5-minute setup — just ask Claude to walk you through it when you’re ready.</p>
-        </div>
-      </li>
-
       <li class="step" data-id="claude">
         <div class="step-top">
           <button class="check" type="button" aria-label="Mark done"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -317,18 +292,6 @@ footer .gloss{margin-top:8px; font-family:var(--font-mono); font-size:.78rem}
         </div>
       </li>
 
-      <li class="step optional" data-id="vscode">
-        <div class="step-top">
-          <button class="check" type="button" aria-label="Mark done"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <div class="step-head"><span class="n"></span><h3>Install VS Code — a friendly editor</h3></div>
-          <span class="chev" aria-hidden="true">›</span>
-        </div>
-        <div class="step-body">
-          <p class="why">Optional, but nice: VS Code is a free, approachable place to <em>see</em> your files while Claude does the editing. It also has a built-in terminal, so everything lives in one window.</p>
-          <a class="dl" href="https://code.visualstudio.com/download" target="_blank" rel="noopener">Download VS Code →</a>
-        </div>
-      </li>
-
     </ol>
   </section>
 
@@ -337,30 +300,25 @@ footer .gloss{margin-top:8px; font-family:var(--font-mono); font-size:.78rem}
   <section>
     <div class="section-head">
       <p class="eyebrow">Your first project</p>
-      <h2>From empty folder to a running start</h2>
-      <p>Setup done? Here’s the whole loop, start to finish. You’re talking to Claude in plain English the entire time.</p>
+      <h2>Five motions from idea to Claude building it</h2>
+      <p>Setup done? This is the whole loop — five motions, and your concept starts becoming real. You’re talking to Claude in plain English the entire time.</p>
     </div>
     <div class="walk">
       <div class="walk-step"><div class="walk-num">1</div><div class="walk-body">
-        <h3>Make the project folder</h3>
-        <p>In your terminal, create and enter a fresh folder inside <code>C:\dev</code>, then start version history:</p>
+        <h3>Create your project and drop in DoGoDev</h3>
+        <p>One paste does it all: make the project folder inside <code>C:\dev</code>, start version history, and pull in the five agents and the pipeline. Change <code>my-first-app</code> to your project’s name first:</p>
         <div class="term"><div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">PowerShell</span><button class="copy" type="button">Copy</button></div>
           <pre><span class="prompt">PS&gt; </span><span class="cmd">mkdir C:\dev\my-first-app</span>
 <span class="prompt">PS&gt; </span><span class="cmd">cd C:\dev\my-first-app</span>
-<span class="prompt">PS&gt; </span><span class="cmd">git init</span></pre></div>
-      </div></div>
-      <div class="walk-step"><div class="walk-num">2</div><div class="walk-body">
-        <h3>Add the DoGoDev suite</h3>
-        <p>Pull in the five agents and the pipeline — run this from inside the folder you just made:</p>
-        <div class="term"><div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">PowerShell</span><button class="copy" type="button">Copy</button></div>
-          <pre><span class="prompt">PS&gt; </span><span class="cmd">git clone --depth 1 https://github.com/mellowcity1/dogodev.git $env:TEMP\dogodev-src</span>
+<span class="prompt">PS&gt; </span><span class="cmd">git init</span>
+<span class="prompt">PS&gt; </span><span class="cmd">git clone --depth 1 https://github.com/mellowcity1/dogodev.git $env:TEMP\dogodev-src</span>
 <span class="prompt">PS&gt; </span><span class="cmd">Copy-Item $env:TEMP\dogodev-src\.claude . -Recurse</span>
 <span class="prompt">PS&gt; </span><span class="cmd">Copy-Item $env:TEMP\dogodev-src\CLAUDE.md .</span>
 <span class="prompt">PS&gt; </span><span class="cmd">Remove-Item $env:TEMP\dogodev-src -Recurse -Force</span></pre></div>
-        <p class="aside">This downloads DoGoDev to a temp folder, copies just the <code>.claude</code> folder and <code>CLAUDE.md</code> into your project, then deletes the temp copy — your project doesn't end up with DoGoDev's own git history in it.</p>
-        <p class="aside">Mac/Linux, same idea: <code>git clone --depth 1 https://github.com/mellowcity1/dogodev.git /tmp/dogodev-src &amp;&amp; cp -r /tmp/dogodev-src/.claude . &amp;&amp; cp /tmp/dogodev-src/CLAUDE.md . &amp;&amp; rm -rf /tmp/dogodev-src</code></p>
+        <p class="aside">What it does: new folder, git history started, then DoGoDev downloads to a temp folder, just the <code>.claude</code> folder and <code>CLAUDE.md</code> copy in, and the temp copy is deleted — your project doesn't end up with DoGoDev's own git history in it.</p>
+        <p class="aside">Mac/Linux, same idea: <code>mkdir -p ~/dev/my-first-app &amp;&amp; cd ~/dev/my-first-app &amp;&amp; git init &amp;&amp; git clone --depth 1 https://github.com/mellowcity1/dogodev.git /tmp/dogodev-src &amp;&amp; cp -r /tmp/dogodev-src/.claude . &amp;&amp; cp /tmp/dogodev-src/CLAUDE.md . &amp;&amp; rm -rf /tmp/dogodev-src</code></p>
       </div></div>
-      <div class="walk-step"><div class="walk-num">3</div><div class="walk-body">
+      <div class="walk-step"><div class="walk-num">2</div><div class="walk-body">
         <h3>Tell it about your project</h3>
         <p>Open <code>CLAUDE.md</code> (VS Code, or any text editor) and fill in the <b>“Your project’s house rules”</b> section near the bottom. This is the one step that makes the agents build <em>your</em> thing instead of guessing — skip it and the analyst is flying blind.</p>
         <p>For a brand-new idea, you don’t need every line answered — just what you already know. At minimum, say what you’re building and in what language:</p>
@@ -369,33 +327,68 @@ footer .gloss{margin-top:8px; font-family:var(--font-mono); font-size:.78rem}
 The covenant: keep it simple — no paid services, nothing that needs an account to run.</pre></div>
         <p class="aside">Leave the rest as the template’s placeholder text for now. That’s not a shortcut you’re getting away with — it’s how DoGoDev is meant to work: an agent that needs something you haven’t answered yet writes the question down and stops, instead of guessing. You fill in more as the project actually takes shape.</p>
       </div></div>
-      <div class="walk-step"><div class="walk-num">4</div><div class="walk-body">
+      <div class="walk-step"><div class="walk-num">3</div><div class="walk-body">
         <h3>Open Claude Code here</h3>
         <p>From inside the folder, run <code>claude</code>. It reads your project and the DoGoDev rules automatically.</p>
         <p class="aside">“<code>claude</code> is not recognized”? Revisit the checklist’s Claude Code step — the install command hasn’t run, or you need a fresh terminal window.</p>
       </div></div>
-      <div class="walk-step"><div class="walk-num">5</div><div class="walk-body">
+      <div class="walk-step"><div class="walk-num">4</div><div class="walk-body">
         <h3>Let Claude check your setup</h3>
         <p>Before building anything, have Claude verify the machine itself. Type:</p>
         <div class="term"><div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">In Claude Code</span><button class="copy" type="button">Copy</button></div>
           <pre><span class="cmd">/setup-check</span></pre></div>
-        <p>Claude runs through everything on this page — Node version, Git, whether Git knows your name yet (the most common silent trap on a fresh machine), whether the DoGoDev suite landed, whether <code>CLAUDE.md</code> got filled in — and reports back in plain language with the exact fix for anything that's off. It ships with the suite you copied in step 2.</p>
+        <p>Claude runs through everything on this page — Node version, Git, whether Git knows your name yet (the most common silent trap on a fresh machine), whether the DoGoDev suite landed, whether <code>CLAUDE.md</code> got filled in — and reports back in plain language with the exact fix for anything that's off. It ships with the suite you copied in motion 1.</p>
         <p class="aside">Type it inside Claude Code, not VS Code — the command is a file Claude reads, not a program your editor can run. (VS Code will offer a confusing “Markdown extension” prompt if you try to run it there.)</p>
       </div></div>
-      <div class="walk-step"><div class="walk-num">6</div><div class="walk-body">
+      <div class="walk-step"><div class="walk-num">5</div><div class="walk-body">
         <h3>Start the relay</h3>
         <p>Just say what you want built. Then move it down the line as each stage finishes:</p>
         <div class="term"><div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">In Claude Code</span><button class="copy" type="button">Copy</button></div>
           <pre><span class="cmt"># plain English — no special syntax</span>
 <span class="cmd">Have the analyst open a work item for a to-do list app.</span>
 <span class="cmd">Send it to the designer, then the builder.</span></pre></div>
-        <p>Each stage appends its work to one file for that task, so the next agent picks up exactly where the last left off.</p>
-      </div></div>
-      <div class="walk-step"><div class="walk-num">7</div><div class="walk-body">
-        <h3>Save it to the cloud</h3>
-        <p>When you’ve got something, push it to GitHub so it’s truly safe. Not sure how? Ask: <em>“help me put this on GitHub.”</em> Claude walks you through it.</p>
+        <p>Each stage appends its work to one file for that task, so the next agent picks up exactly where the last left off. That’s it — your idea is becoming software.</p>
       </div></div>
     </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">When you’re ready</p>
+      <h2>Two more pieces — nothing here blocks your first build</h2>
+      <p>Come back to these when you’ve got something worth protecting, or want a nicer window into your files.</p>
+    </div>
+    <ol class="steps" id="steps-later">
+
+      <li class="step" data-id="github">
+        <div class="step-top">
+          <button class="check" type="button" aria-label="Mark done"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="step-head"><span class="n"></span><h3>GitHub — back your work up to the cloud</h3></div>
+          <span class="chev" aria-hidden="true">›</span>
+        </div>
+        <div class="step-body">
+          <p class="why">GitHub is your code’s home and backup in the cloud. Here’s the part nobody tells you: saving your work on your computer (a “commit”) is <b>not</b> the same as backing it up — <b>“pushing” to GitHub is what actually protects it.</b> A project can be one push away from vanishing if a laptop dies.</p>
+          <p><b>Cost:</b> free for everything you’ll do starting out — private projects included. You’d only pay if your usage balloons (large teams, heavy automation, lots of storage).</p>
+          <a class="dl" href="https://github.com/signup" target="_blank" rel="noopener">Sign up for GitHub →</a>
+          <p>Once you have an account, the push itself is Claude’s job. In Claude Code, just ask: <em>“help me put this on GitHub.”</em> It walks you through the whole thing, including the 5-minute “SSH key” setup that makes pushing painless from then on.</p>
+        </div>
+      </li>
+
+      <li class="step" data-id="vscode">
+        <div class="step-top">
+          <button class="check" type="button" aria-label="Mark done"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10.5l4 4 8-9" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="step-head"><span class="n"></span><h3>VS Code — a friendly window into your files</h3></div>
+          <span class="chev" aria-hidden="true">›</span>
+        </div>
+        <div class="step-body">
+          <p class="why">VS Code is a free, approachable place to <em>see</em> your files while Claude does the editing. It also has a built-in terminal, so everything lives in one window.</p>
+          <a class="dl" href="https://code.visualstudio.com/download" target="_blank" rel="noopener">Download VS Code →</a>
+        </div>
+      </li>
+
+    </ol>
   </section>
 
   <div class="wrap" style="padding:0">
@@ -409,7 +402,7 @@ The covenant: keep it simple — no paid services, nothing that needs an account
   <footer>
     <div class="fmark"><span aria-hidden="true">🔥</span> Do<b>Go</b>Dev</div>
     <p>Small, guided dev tooling for building with Claude.</p>
-    <p class="gloss">dogo — Swahili for <em>small</em>. Part of the dogomoto family. · Draft front door, v0.3</p>
+    <p class="gloss">dogo — Swahili for <em>small</em>. Part of the dogomoto family. · Draft front door, v0.4</p>
   </footer>
 
 </div>
@@ -418,7 +411,8 @@ The covenant: keep it simple — no paid services, nothing that needs an account
 (function(){
   var KEY='dogodev-start-v1';
   var steps=[].slice.call(document.querySelectorAll('.step'));
-  var total=steps.length;
+  var reqSteps=steps.filter(function(s){ return s.closest('#steps'); });
+  var total=reqSteps.length;
   var pcTotal=document.getElementById('pc-total');
   var pcDone=document.getElementById('pc-done');
   var bar=document.getElementById('bar');
@@ -429,7 +423,7 @@ The covenant: keep it simple — no paid services, nothing that needs an account
   try{ saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ saved={}; }
 
   function render(){
-    var done=0; steps.forEach(function(s){ if(s.classList.contains('done')) done++; });
+    var done=0; reqSteps.forEach(function(s){ if(s.classList.contains('done')) done++; });
     if(pcDone) pcDone.textContent=done;
     if(bar) bar.style.width=(total? (done/total*100):0)+'%';
   }
