@@ -150,6 +150,11 @@ section{padding:42px 0}
 .closer p b{color:var(--ink)}
 .closer .say{margin-top:20px; font-family:var(--font-mono); font-size:.92rem; color:var(--accent-ink); background:var(--accent-soft); border:1px solid var(--accent-border); border-radius:10px; padding:12px 15px}
 
+.jargon{display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:2px 30px; margin:0}
+.jargon > div{padding:11px 0; border-bottom:1px solid var(--border)}
+.jargon dt{font-family:var(--font-mono); font-size:.88rem; font-weight:600; color:var(--accent-ink)}
+.jargon dd{margin:4px 0 0; font-size:.92rem; line-height:1.5; color:var(--ink-soft)}
+
 footer{padding:40px 0 60px; border-top:1px solid var(--border); margin-top:44px; color:var(--ink-faint); font-size:.86rem}
 footer .fmark{font-family:var(--font-display); font-weight:700; color:var(--ink); letter-spacing:-.02em}
 footer .fmark b{color:var(--accent)}
@@ -402,10 +407,38 @@ The covenant: keep it simple — no paid services, nothing that needs an account
     </div>
   </div>
 
+  <section>
+    <div class="section-head">
+      <p class="eyebrow">Decoder ring</p>
+      <h2>The jargon, in plain English</h2>
+      <p>Every term this page (and your first week) throws at you, decoded. Nobody was born knowing these.</p>
+    </div>
+    <dl class="jargon">
+      <div><dt>agent</dt><dd>A Claude specialist with one job. DoGoDev ships five: analyst, designer, builder, dba, operator.</dd></div>
+      <div><dt>CLAUDE.md</dt><dd>Your project’s house-rules file. The agents read it every session and treat it as law — it’s how they build <em>your</em> thing instead of guessing.</dd></div>
+      <div><dt>CLI</dt><dd>Command-line interface — a program you use by typing commands instead of clicking buttons. Claude Code is one.</dd></div>
+      <div><dt>clone</dt><dd>Download a full copy of a project, history and all. That’s how the DoGoDev suite gets to your machine.</dd></div>
+      <div><dt>commit</dt><dd>A saved snapshot of your work — on your computer only. A commit is <em>not</em> a backup until you push it.</dd></div>
+      <div><dt>DBA</dt><dd>Database administrator — the specialist who makes sure your data survives everything. The role everyone forgets until the outage.</dd></div>
+      <div><dt>git</dt><dd>The tool that keeps every version of your work, so nothing is ever truly lost.</dd></div>
+      <div><dt>GitHub</dt><dd>The website where git projects live in the cloud. Your off-machine backup and your code’s public (or private) home.</dd></div>
+      <div><dt>irm … | iex</dt><dd>PowerShell for “download this script and run it.” Healthy habit: read the script first — ours is at <a href="/new.ps1">dogodev.com/new.ps1</a>.</dd></div>
+      <div><dt>Node.js</dt><dd>The engine that runs your app’s code outside a web browser. The one runtime DoGoDev standardizes on.</dd></div>
+      <div><dt>pipeline</dt><dd>DoGoDev’s relay: each task’s file passes analyst → designer → builder → dba → operator, and every stage adds its section.</dd></div>
+      <div><dt>PowerShell (PS&gt;)</dt><dd>Windows’ terminal. <code>PS&gt;</code> is just its prompt showing it’s ready — you never type that part.</dd></div>
+      <div><dt>push</dt><dd>Send your commits up to GitHub. <em>This</em> is the step that actually backs your work up.</dd></div>
+      <div><dt>repo</dt><dd>Repository — one project’s folder plus its entire git history. “The repo” = “the project.”</dd></div>
+      <div><dt>/setup-check</dt><dd>DoGoDev’s command inside Claude Code: verifies your whole setup and tells you the exact fix for anything off.</dd></div>
+      <div><dt>SSH key</dt><dd>A saved credential that lets your machine push to GitHub without typing a password every time. Ask Claude to set it up — five minutes.</dd></div>
+      <div><dt>terminal</dt><dd>The window where you type commands. PowerShell, Claude Code’s window, and VS Code’s built-in panel are all terminals.</dd></div>
+      <div><dt>work item (WI-001…)</dt><dd>One task, one file. Every stage appends its work to it, so nothing gets lost between hand-offs — it’s the whole pipeline’s memory.</dd></div>
+    </dl>
+  </section>
+
   <footer>
     <div class="fmark"><span aria-hidden="true">🔥</span> Do<b>Go</b>Dev</div>
     <p>Small, guided dev tooling for building with Claude.</p>
-    <p class="gloss">dogo — Swahili for <em>small</em>. Part of the dogomoto family. · Draft front door, v0.5</p>
+    <p class="gloss">dogo — Swahili for <em>small</em>. Part of the dogomoto family. · Draft front door, v0.6</p>
   </footer>
 
 </div>
