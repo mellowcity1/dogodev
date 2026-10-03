@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<!-- Published as a claude.ai artifact (https://claude.ai/artifact/UD5jgDfHr1UMRB977Zqyph); this repo copy is the durable one. Source record: dogodev-dogfood-todo, .claude/pipeline/WI-002-delete-task.md -->
-<title>WI-002, Start to Ship</title>
+<!-- Source record: the dogodev-dogfood-todo project, .claude/pipeline/WI-002-delete-task.md -->
+<title>WI-002, Start to Ship · DoGoDev</title>
+<meta name="description" content="How one beginner request, “Add a way to delete a task,” moved through DoGoDev’s six stages and three laps of the test loop to ship.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -56,6 +57,7 @@ a:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radi
 header{display:flex; flex-direction:column; gap:14px}
 .mark{font-family:var(--font-display); font-weight:700; font-size:1.05rem; letter-spacing:-.02em}
 .mark b{color:var(--accent)}
+a.mark{align-self:flex-start; color:var(--ink); border-bottom:0}
 h1{font-size:clamp(2rem,6vw,2.9rem)}
 .lede{color:var(--ink-soft); font-size:1.08rem; max-width:60ch}
 
@@ -117,7 +119,7 @@ footer{margin-top:36px; font-size:.86rem; color:var(--ink-faint)}
 <div class="wrap">
 
   <header>
-    <div class="mark">🔥 Do<b>Go</b>Dev</div>
+    <a class="mark" href="/"><span aria-hidden="true">🔥</span> Do<b>Go</b>Dev</a>
     <p class="eyebrow">A real work item, start to ship</p>
     <h1>One sentence in. Eleven stage runs, three laps, one shipped command.</h1>
     <p class="lede">A beginner asks for a feature in plain English. Six specialist agents carry it through one shared file, and when it isn’t right, it goes back around. This is the actual record, condensed.</p>
@@ -280,7 +282,7 @@ footer{margin-top:36px; font-size:.86rem; color:var(--ink-faint)}
   </section>
 
   <footer>
-    DoGoDev: guided Claude Code tooling for people building their first software. <a href="https://dogodev.com">dogodev.com</a>
+    DoGoDev: guided Claude Code tooling for people building their first software. <a href="/">Get started at dogodev.com</a>
   </footer>
 
 </div>
