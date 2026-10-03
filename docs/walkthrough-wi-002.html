@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Published as a claude.ai artifact (https://claude.ai/artifact/UD5jgDfHr1UMRB977Zqyph); this repo copy is the durable one. Source record: dogodev-dogfood-todo, .claude/pipeline/WI-002-delete-task.md -->
+<title>WI-002, Start to Ship</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one reading column; the run is a vertical log, each lap a tinted band, returns marked between bands. DoGoDev's own palette and faces. */
+:root{
+  --bg:#F7F4EF; --surface:#FFFDFA; --sunken:#F1EBE2;
+  --ink:#221D16; --ink-soft:#5B5145; --ink-faint:#8C8071;
+  --border:#E7DDCE; --border-strong:#D8CBB7;
+  --accent:#D9701F; --accent-ink:#9C4E12; --accent-soft:#F7E8D6; --accent-border:#E6C79E;
+  --pass:#2F7D49; --pass-soft:#E3F0E5; --pass-border:#B5DDBE;
+  --fail:#A8402C; --fail-soft:#F8E4DE; --fail-border:#E8B9AC;
+  --term-bg:#201B15; --term-ink:#ECE4D8; --term-faint:#8E8272; --term-accent:#F0A45A;
+  --font-display:'Bricolage Grotesque',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,'Cascadia Code',Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#191510; --surface:#221D16; --sunken:#2A241C;
+    --ink:#EFE8DD; --ink-soft:#BAAF9E; --ink-faint:#8A7F6E;
+    --border:#362F25; --border-strong:#453C30;
+    --accent:#EF9A54; --accent-ink:#F2AE6E; --accent-soft:rgba(239,154,84,.12); --accent-border:rgba(239,154,84,.34);
+    --pass:#6CC88A; --pass-soft:rgba(108,200,138,.12); --pass-border:rgba(108,200,138,.34);
+    --fail:#EE8C76; --fail-soft:rgba(238,140,118,.12); --fail-border:rgba(238,140,118,.36);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#191510; --surface:#221D16; --sunken:#2A241C;
+  --ink:#EFE8DD; --ink-soft:#BAAF9E; --ink-faint:#8A7F6E;
+  --border:#362F25; --border-strong:#453C30;
+  --accent:#EF9A54; --accent-ink:#F2AE6E; --accent-soft:rgba(239,154,84,.12); --accent-border:rgba(239,154,84,.34);
+  --pass:#6CC88A; --pass-soft:rgba(108,200,138,.12); --pass-border:rgba(108,200,138,.34);
+  --fail:#EE8C76; --fail-soft:rgba(238,140,118,.12); --fail-border:rgba(238,140,118,.36);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-body); font-size:16.5px; line-height:1.6; -webkit-font-smoothing:antialiased}
+.wrap{max-width:760px; margin:0 auto; padding-inline:20px; padding-block:48px 64px}
+h1,h2,h3{font-family:var(--font-display); font-weight:700; letter-spacing:-.01em; line-height:1.12; margin:0; text-wrap:balance}
+p{margin:0}
+code{font-family:var(--font-mono); font-size:.88em; background:var(--sunken); padding:.06em .32em; border-radius:4px; overflow-wrap:anywhere}
+a{color:var(--accent-ink); text-decoration:none; border-bottom:1px solid var(--accent-border)}
+a:hover{border-bottom-color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:2px}
+.eyebrow{font-family:var(--font-mono); font-size:.74rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--accent-ink)}
+
+header{display:flex; flex-direction:column; gap:14px}
+.mark{font-family:var(--font-display); font-weight:700; font-size:1.05rem; letter-spacing:-.02em}
+.mark b{color:var(--accent)}
+h1{font-size:clamp(2rem,6vw,2.9rem)}
+.lede{color:var(--ink-soft); font-size:1.08rem; max-width:60ch}
+
+.ask{margin-top:6px; background:var(--term-bg); border-radius:10px; overflow:hidden; border:1px solid #000}
+.ask-bar{font-family:var(--font-mono); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--term-faint); padding:7px 13px; border-bottom:1px solid rgba(255,255,255,.07)}
+.ask pre{margin:0; padding:12px 14px; font-family:var(--font-mono); font-size:.95rem; color:var(--term-ink); white-space:pre-wrap}
+.ask .p{color:var(--term-accent)}
+
+.meta{display:flex; flex-wrap:wrap; gap:6px 20px; font-family:var(--font-mono); font-size:.8rem; color:var(--ink-faint); font-variant-numeric:tabular-nums}
+.meta b{color:var(--ink); font-weight:600}
+
+.run{margin-top:40px; display:flex; flex-direction:column; gap:12px}
+.lap{background:var(--accent-soft); border:1.5px dashed var(--accent-border); border-radius:16px; padding:14px; display:flex; flex-direction:column; gap:10px}
+.lap.ship{background:transparent; border-style:solid; border-color:var(--border)}
+.lap-head{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; padding:0 4px}
+.lap-head h2{font-size:1.15rem}
+.lap-head span{font-family:var(--font-mono); font-size:.74rem; color:var(--ink-faint); font-variant-numeric:tabular-nums}
+
+.stage{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:14px 16px; display:grid; grid-template-columns:8.6rem minmax(0,1fr); gap:6px 16px}
+.who{display:flex; flex-direction:column; gap:3px}
+.role{font-family:var(--font-mono); font-size:.72rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-ink)}
+.model,.time{font-family:var(--font-mono); font-size:.72rem; color:var(--ink-faint); font-variant-numeric:tabular-nums}
+.what{display:flex; flex-direction:column; gap:8px; min-width:0}
+.what p{color:var(--ink-soft); font-size:.95rem}
+.what p strong{color:var(--ink); font-weight:600}
+.quote{font-size:.9rem; color:var(--ink); border-left:2px solid var(--border-strong); padding-left:10px}
+.note{font-size:.84rem; color:var(--ink-faint)}
+.verdict{align-self:flex-start; font-family:var(--font-mono); font-size:.72rem; font-weight:600; letter-spacing:.08em; padding:2px 8px; border-radius:999px; border:1px solid}
+.verdict.pass{color:var(--pass); background:var(--pass-soft); border-color:var(--pass-border)}
+.verdict.fail{color:var(--fail); background:var(--fail-soft); border-color:var(--fail-border)}
+
+.back{display:flex; gap:12px; align-items:flex-start; padding:4px 18px}
+.back .arrow{flex:none; font-family:var(--font-mono); font-weight:600; color:var(--accent); font-size:1.1rem; line-height:1.4}
+.back p{font-size:.92rem; color:var(--ink-soft)}
+.back p strong{color:var(--accent-ink)}
+
+section.lessons{margin-top:48px; display:flex; flex-direction:column; gap:16px}
+section.lessons h2{font-size:1.5rem}
+.three{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px}
+.three div{border-top:2px solid var(--accent); padding-top:10px; display:flex; flex-direction:column; gap:6px}
+.three h3{font-size:1.02rem}
+.three p{font-size:.92rem; color:var(--ink-soft)}
+
+.how{margin-top:40px; background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:18px 20px; display:flex; flex-direction:column; gap:10px}
+.how h2{font-size:1.1rem}
+.how ul{margin:0; padding-left:1.1rem; display:flex; flex-direction:column; gap:6px; color:var(--ink-soft); font-size:.92rem}
+
+footer{margin-top:36px; font-size:.86rem; color:var(--ink-faint)}
+
+@media (max-width:600px){
+  .stage{grid-template-columns:minmax(0,1fr)}
+  .who{flex-direction:row; flex-wrap:wrap; gap:4px 12px; align-items:baseline}
+  .three{grid-template-columns:minmax(0,1fr)}
+  .back{padding:4px 6px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="mark">🔥 Do<b>Go</b>Dev</div>
+    <p class="eyebrow">A real work item, start to ship</p>
+    <h1>One sentence in. Eleven stage runs, three laps, one shipped command.</h1>
+    <p class="lede">A beginner asks for a feature in plain English. Six specialist agents carry it through one shared file, and when it isn’t right, it goes back around. This is the actual record, condensed.</p>
+    <div class="ask">
+      <div class="ask-bar">The whole request</div>
+      <pre><span class="p">&gt; </span>Add a way to delete a task.</pre>
+    </div>
+    <div class="meta">
+      <span><b>11</b> stage runs</span>
+      <span><b>3</b> laps through the test loop</span>
+      <span><b>19/19</b> tests</span>
+      <span><b>29 min</b> of agent time</span>
+      <span>shipped as <b>0.1.1</b></span>
+    </div>
+  </header>
+
+  <div class="run">
+
+    <div class="lap">
+      <div class="lap-head"><h2>Lap 1</h2><span>14 min 15 s</span></div>
+
+      <div class="stage">
+        <div class="who"><span class="role">Analyst</span><span class="model">Opus</span><span class="time">2:14</span></div>
+        <div class="what">
+          <p>Turned one sentence into a work item: what’s in, what’s out, and <strong>10 numbered acceptance criteria</strong> someone can check by running the app. Kept the data stage in the plan because this is the app’s first command that destroys data.</p>
+          <p class="note">Asked the person two questions, each with a safe default: no undo, and a deleted top number gets reused by the next task.</p>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="who"><span class="role">Designer</span><span class="model">Sonnet</span><span class="time">1:40</span></div>
+        <div class="what">
+          <p>Wrote every line the person will see: <code>Deleted #2: finish the report</code>, two error messages, the README example, and a 12-step worked example.</p>
+          <p class="note">One line of that example could never happen as typed. Nobody knew yet.</p>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="who"><span class="role">DBA</span><span class="model">Opus</span><span class="time">4:46</span></div>
+        <div class="what">
+          <p>No database change was needed, but before any code existed it found the trap that would have broken every delete:</p>
+          <p class="quote"><code>Number('3')</code> binds as REAL <code>3.0</code> and matches nothing, so every delete would report “no task”.</p>
+          <p class="note">Set the rule the builder followed (pass the id as text) and left 6 data checks for the tester.</p>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="who"><span class="role">Builder</span><span class="model">Sonnet</span><span class="time">1:23</span></div>
+        <div class="what">
+          <p>Built the command on the DBA’s rule. <strong>11 new tests, 18 of 18 passing.</strong></p>
+          <p class="note">Reported that the designer’s whole example “reproduced line for line” in a real shell.</p>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="who"><span class="role">Tester</span><span class="model">Opus</span><span class="time">4:12</span></div>
+        <div class="what">
+          <span class="verdict pass">PASS</span>
+          <p>Re-ran everything in PowerShell, the way the person would: all 10 criteria, about 15 extra edge inputs, and the DBA’s 6 data checks. Ended with three “Try it yourself” steps for the person.</p>
+          <p class="note">Also noted that <code>delete #3</code> can’t work as the example shows, because the shell treats <code>#3</code> as a comment, and that the builder’s “line for line” claim “can only hold if #3 was quoted.”</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="back">
+      <span class="arrow" aria-hidden="true">↻</span>
+      <p><strong>The person tries it, and it goes back to the designer.</strong> “<code>list</code> shows my tasks as #1, #3, so I typed <code>delete #3</code> and it told me delete needs a task id — but I gave it one!”</p>
+    </div>
+
+    <div class="lap">
+      <div class="lap-head"><h2>Lap 2</h2><span>9 min 00 s</span></div>
+
+      <div class="stage">
+        <div class="who"><span class="role">Designer</span><span class="model">Sonnet</span><span class="time">3:00</span></div>
+        <div class="what">
+          <p class="quote">The person’s experience says the design is what failed.</p>
+          <p>Owned the wrong example line and rewrote both error messages to teach the fix: <code>(number only, no #: most shells treat #1 as a comment and never pass it on)</code></p>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="who"><span class="role">Builder</span><span class="model">Sonnet</span><span class="time">1:10</span></div>
+        <div class="what">
+          <p>Rebuilt to the new wording. <strong>19 of 19 tests passing.</strong></p>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="who"><span class="role">Tester</span><span class="model">Opus</span><span class="time">4:50</span></div>
+        <div class="what">
+          <span class="verdict fail">FAIL · owner: builder</span>
+          <p>Ran the README’s commands exactly as written. The last one did nothing: it read <code>delete #1</code>, so the task stayed on the list. All 19 tests still passed; only a real run could see it.</p>
+          <p class="note">This defect was planted on purpose during the test run, to prove the tester catches what tests can’t.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="back">
+      <span class="arrow" aria-hidden="true">↻</span>
+      <p><strong>Back to the builder.</strong> The tester named the owner and set the item’s status to <code>rework — builder, round 3</code>.</p>
+    </div>
+
+    <div class="lap">
+      <div class="lap-head"><h2>Lap 3</h2><span>4 min 41 s</span></div>
+
+      <div class="stage">
+        <div class="who"><span class="role">Builder</span><span class="model">Sonnet</span><span class="time">0:48</span></div>
+        <div class="what">
+          <p>Restored <code>delete 1</code>, re-ran the README block in PowerShell, 19 of 19 passing.</p>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="who"><span class="role">Tester</span><span class="model">Opus</span><span class="time">3:52</span></div>
+        <div class="what">
+          <span class="verdict pass">PASS</span>
+          <p>Every criterion, every data check, and the designer’s new example: <strong>22 of 22 lines identical</strong>, with <code>delete #3</code> typed the way a person would type it.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="lap ship">
+      <div class="lap-head"><h2>Ship</h2><span>1 min 07 s</span></div>
+      <div class="stage">
+        <div class="who"><span class="role">Operator</span><span class="model">Haiku</span><span class="time">1:07</span></div>
+        <div class="what">
+          <p>Version 0.1.1 and a changelog line, a smoke run of the README block, and a support note for the next “it didn’t delete” report: the shell ate the <code>#</code>, type the number alone. <strong>Status: shipped.</strong></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <section class="lessons">
+    <h2>What the record shows</h2>
+    <div class="three">
+      <div>
+        <h3>Data before code</h3>
+        <p>The DBA found the number-versus-text trap before a line was written. The builder never hit it.</p>
+      </div>
+      <div>
+        <h3>The maker doesn’t grade the work</h3>
+        <p>The tester caught a claim the builder couldn’t have verified, and a defect 19 passing tests couldn’t see.</p>
+      </div>
+      <div>
+        <h3>The person stays the judge</h3>
+        <p>Lap 1 passed every test. The person’s own try still sent it back, and the error messages came out better for it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="how">
+    <h2>How this run was done</h2>
+    <ul>
+      <li>The project is a small, zero-dependency to-do app on the command line, kept for testing DoGoDev. Run on 3 October 2026.</li>
+      <li>Each stage ran as a separate Claude agent on its assigned model, reading only its own role file, the project’s house rules, and the work-item file. Nothing passed between stages except that one file.</li>
+      <li>A Claude session ran the test: it decided which stage went next, played the person in lap 2, and planted the README defect. In normal use the first two are you, typing plain English into Claude Code.</li>
+            <li>Times are each agent’s own running time. The full record is one file of 1,195 lines: <code>.claude/pipeline/WI-002-delete-task.md</code>.</li>
+    </ul>
+  </section>
+
+  <footer>
+    DoGoDev: guided Claude Code tooling for people building their first software. <a href="https://dogodev.com">dogodev.com</a>
+  </footer>
+
+</div>
+</body>
+</html>
