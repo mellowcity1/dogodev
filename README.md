@@ -18,9 +18,9 @@ designer, dba, or builder — until it is.
 
 ## New to all this?
 
-Start with the front door — **Getting Started** (prerequisites, install Windows-first, and your
-first project, step by step). *Hosted at dogodev.com — coming soon; the source lives alongside
-this repo.*
+Start with the front door — **[dogodev.com](https://dogodev.com)**: prerequisites, a
+Windows-first install, and your first project, step by step. The page's source is
+[`site/`](site/) in this repo.
 
 ## Install into your project
 
@@ -91,5 +91,6 @@ default. Notes and two tested, ready-to-copy examples: [`docs/hooks.md`](docs/ho
 
 ## Status
 
-**v0.1** — extracted from a real product build ([ITAuditgo](https://github.com/mellowcity1/ITAuditgo)).
-Expect rough edges; the method is proven, the packaging is new.
+**v0.7** — the method was extracted from a real product build (ITAuditgo, an IT-audit tool) and
+proven on a fresh project, a to-do CLI, through two full work items, the second including two laps
+of the test loop. Still young: expect rough edges, and say so when you hit one.
