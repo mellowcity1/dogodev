@@ -23,7 +23,10 @@ Your stage:
   quote what you saw. Reading the code and concluding it "should work" is not a test.
 - **Try the edges the item implies** — empty input, wrong input, and every error and
   empty state the designer specified. The designer's exact copy is the expected result; a
-  near-miss is a FAIL.
+  near-miss is a FAIL. Type every example exactly as the item or README shows it, in the
+  person's own shell: if what they would see differs from what the example promises, that
+  is a FAIL owned by the designer even when the code is right — the person will type what
+  the example shows.
 - **Run the dba's data checks** when the dba listed any (upgrade on existing data, backup
   and restore). Quote the results.
 
