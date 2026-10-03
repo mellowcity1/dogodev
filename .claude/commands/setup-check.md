@@ -20,8 +20,8 @@ explicitly offered fixes at the end, and only with the user's yes.
    error. This is the most common silent trap on a fresh machine.
 4. **This folder is a project** — `git rev-parse --is-inside-work-tree`. If not, they
    likely skipped `git init` in the walkthrough.
-5. **The DoGoDev suite is here** — confirm `.claude/agents/` contains the five role files
-   (analyst, designer, builder, dba, operator), `.claude/pipeline/_TEMPLATE.md` exists,
+5. **The DoGoDev suite is here** — confirm `.claude/agents/` contains the six role files
+   (analyst, designer, dba, builder, tester, operator), `.claude/pipeline/_TEMPLATE.md` exists,
    and `CLAUDE.md` exists at the project root.
 6. **House rules are filled in** — read `CLAUDE.md`'s "Your project's house rules"
    section. If it still contains the template's italic `_e.g. ..._` placeholder lines,

@@ -119,7 +119,7 @@ function New-DogodevProject($name) {
             git clone --depth 1 https://github.com/mellowcity1/dogodev.git $tmp 2>&1 | Out-Null
             Copy-Item (Join-Path $tmp '.claude') $proj -Recurse
             Copy-Item (Join-Path $tmp 'CLAUDE.md') $proj
-            Write-Ok "DoGoDev suite installed (five agents, pipeline, /setup-check)"
+            Write-Ok "DoGoDev suite installed (six agents, pipeline, /setup-check)"
         } finally {
             if (Test-Path $tmp) { Remove-Item $tmp -Recurse -Force }
         }

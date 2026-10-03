@@ -7,12 +7,14 @@ running app, without giving up at the setup wall.
 
 ## What it is
 
-Five role agents that move work through a file-based pipeline:
+Six role agents that move work through a file-based pipeline:
 
-**analyst → designer → builder → dba → operator**
+**analyst → designer → dba → builder → tester → operator**
 
 You describe what you want in plain English; each stage does its job and hands the next a
 **single file**, so context never gets lost between steps. Stages that don't apply are skipped.
+The tester runs what was built; when it isn't right, the item goes back around — to the
+designer, dba, or builder — until it is.
 
 ## New to all this?
 
@@ -59,17 +61,25 @@ Or by hand:
 
 See [`.claude/pipeline/README.md`](.claude/pipeline/README.md). In short: one file per task
 (`WI-NNN`), each stage **appends** its section, and **nobody invents** — an agent missing
-something writes the question down and stops.
+something writes the question down and stops. When the tester finds a problem, the owner
+appends a **round 2** section and the item is tested again; the file keeps every lap.
 
-## The five roles
+## The six roles
 
-| Role | Does | Skipped when |
-|------|------|--------------|
-| **analyst** | What & why; requirements + numbered acceptance criteria | never (opens every item) |
-| **designer** | What the user sees — screens, copy, every state | pure backend work |
-| **builder** | Writes the code, runs the whole test suite, reports evidence | — |
-| **dba** | Schema, data, migrations, backups — the outage nobody planned for | no data surface touched |
-| **operator** | Version, ship, smoke-test, and the support notes a future 2am needs | never (closes every item) |
+| Role | Does | Model | Skipped when |
+|------|------|-------|--------------|
+| **analyst** | What & why; requirements + numbered acceptance criteria | `opus` | never (opens every item) |
+| **designer** | What the user sees — screens, copy, every state | `sonnet` | pure backend work |
+| **dba** | Settles the data shape before the code; migrations, backups — the outage nobody planned for | `opus` | no data surface touched |
+| **builder** | Writes the code, runs the whole test suite, reports evidence | `sonnet` | — |
+| **tester** | Runs it for real, criterion by criterion; passes it on or sends it back around | `opus` | never |
+| **operator** | Version, ship, smoke-test, and the support notes a future 2am needs | `haiku` | never (closes every item) |
+
+Each agent names its Claude model in its file's `model:` line, matched to the job: Opus where a
+mistake is expensive, Sonnet for the heavy lifting, Haiku for quick release chores. DoGoDev
+needs a paid Claude plan (Pro or above), and all three are available on it. Change any line to
+suit your plan — the trade-offs and a one-switch override are in
+[`.claude/pipeline/README.md`](.claude/pipeline/README.md#each-role-runs-on-the-model-that-fits-its-job).
 
 ## Optional: enforced guardrails (hooks)
 

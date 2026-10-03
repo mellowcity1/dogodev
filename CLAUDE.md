@@ -1,18 +1,23 @@
 # DoGoDev — operating rules for this repo
 
-This project is built with **DoGoDev**: five role agents (analyst → designer → builder → dba →
-operator) that move work through a file-based pipeline. The full method is in
+This project is built with **DoGoDev**: six role agents (analyst → designer → dba → builder →
+tester → operator) that move work through a file-based pipeline. The full method is in
 `.claude/pipeline/README.md`. These rules apply to every session and every agent.
 
 ## The pipeline rule (never broken)
 
 - Every task is ONE file: `.claude/pipeline/WI-NNN-short-name.md`, created from `_TEMPLATE.md`.
-- Each stage **appends** its own section; nothing earlier is edited or deleted.
+- Each stage **appends** its own section; nothing earlier is edited or deleted. The one
+  exception is the `Status:` line at the top, which always says where the item is right now.
 - Context travels in that file plus the standing docs below. Nothing is pasted between stages.
 - If an agent needs something not in the item file or this repo, it writes the question into the
   item's **Open questions** section and **stops**. It never invents an answer to keep moving.
-- Only the **operator** may write `Status: shipped`, and only when every earlier section shows
-  real evidence (tests run, screens seen) rather than intention.
+- The **tester** checks every item by running it. A FAIL goes back to the stage that owns the
+  fix as a new **round** section — never a rewrite. Three rounds without a PASS: stop and ask
+  the person.
+- Only the **operator** may write `Status: shipped`, and only when the tester's latest round
+  says PASS and every earlier section shows real evidence (tests run, screens seen) rather than
+  intention.
 
 ## Standing docs — read before acting
 
@@ -30,8 +35,8 @@ operator) that move work through a file-based pipeline. The full method is in
 
 - **Stack:** _e.g. Node 22.5+, `node:sqlite`, no npm dependencies, no build step._
 - **Where things live:** _e.g. `lib/` modules by domain; pages in `public/`; tests in `tests/`._
-- **Run the tests:** _the ONE command — e.g. `node tests/run.js`. Builder and dba run the WHOLE
-  suite, not just the new file, and report the tail as evidence. A red suite is reported RED._
+- **Run the tests:** _the ONE command — e.g. `node tests/run.js`. Builder, dba, and tester run the
+  WHOLE suite, not just the new file, and report the tail as evidence. A red suite is reported RED._
 - **Data lives in:** _e.g. schema in `lib/db.js`, seeds in `lib/seed.js`. A change that only works
   on a fresh database isn't done — state what happens to existing data on upgrade._
 - **Ship it:** _e.g. version + changelog location, and the deploy path (never invent a new one)._

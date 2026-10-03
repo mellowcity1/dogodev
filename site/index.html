@@ -75,12 +75,26 @@ section{padding:42px 0}
 .section-head p{color:var(--ink-soft); margin:12px 0 0; max-width:62ch}
 .rule{height:1px; background:var(--border); border:0; margin:0}
 
-.flow{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px}
-.flow-step{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px 15px; box-shadow:var(--shadow)}
+.flow{display:flex; flex-direction:column; gap:12px}
+.flow-step{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px 15px; box-shadow:var(--shadow); display:flex; flex-direction:column}
 .flow-step .role{font-family:var(--font-mono); font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--accent-ink); display:block; margin-bottom:8px}
 .flow-step h3{font-size:1.02rem; font-weight:600}
 .flow-step p{font-size:.86rem; color:var(--ink-soft); margin:6px 0 0}
+.flow-step .model{align-self:flex-start; margin-top:auto; padding-top:10px; font-family:var(--font-mono); font-size:.68rem; letter-spacing:.06em; color:var(--ink-faint)}
+.flow-step .model::before{content:"runs on "}
+.flow-end{flex-direction:row; flex-wrap:wrap; align-items:baseline; gap:4px 14px; padding:13px 15px}
+.flow-end .role{margin:0}
+.flow-end p{margin:0; flex:1 1 220px}
+.flow-end .model{margin:0 0 0 auto; padding:0}
+.loop{background:var(--accent-soft); border:1.5px dashed var(--accent-border); border-radius:16px; padding:14px 14px 16px}
+.loop-label{font-family:var(--font-mono); font-size:.74rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--accent-ink); margin:0 2px 12px}
+.loop-steps{display:grid; grid-template-columns:repeat(4,1fr); gap:10px}
+.loop-back{position:relative; height:18px; margin:2px calc((100% - 30px) / 8) 0; border:2px solid var(--accent); border-top:0; border-radius:0 0 12px 12px}
+.loop-back::before{content:""; position:absolute; left:-7px; top:-6px; border:6px solid transparent; border-top:0; border-bottom:8px solid var(--accent)}
+.loop-note{margin:12px 2px 0; font-size:.88rem; color:var(--ink-soft); text-align:center}
+.loop-note b{color:var(--accent-ink)}
 .flow-note{margin:20px 0 0; font-size:.95rem; color:var(--ink-soft); max-width:64ch}
+.flow-note + .flow-note{margin-top:12px}
 .flow-note b{color:var(--ink)}
 
 .progress-card{position:sticky; top:0; z-index:5; background:var(--bg); padding:14px 0 14px}
@@ -167,6 +181,14 @@ footer .gloss{margin-top:8px; font-family:var(--font-mono); font-size:.78rem}
   .walk-step{grid-template-columns:1fr; gap:8px}
   .walk-step:not(:last-child) .walk-num::after{display:none}
 }
+@media (max-width:680px){
+  .loop-steps{grid-template-columns:repeat(2,1fr)}
+  .loop-back{display:none}
+  .loop-note::before{content:"↻ "; color:var(--accent-ink); font-weight:600}
+}
+@media (max-width:380px){
+  .loop-steps{grid-template-columns:1fr}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none !important; animation:none !important}}
 </style>
 </head>
@@ -191,17 +213,26 @@ footer .gloss{margin-top:8px; font-family:var(--font-mono); font-size:.78rem}
   <section>
     <div class="section-head">
       <p class="eyebrow">The idea</p>
-      <h2>You describe it. Five specialists carry it forward.</h2>
-      <p>DoGoDev turns the messy middle of building — “I know what I want, but how does it become a real, running thing?” — into a relay. You talk in plain English; each stage does its job and hands the next a single file, so nothing gets lost between steps.</p>
+      <h2>You describe it. Six specialists carry it forward.</h2>
+      <p>DoGoDev turns the messy middle of building — “I know what I want, but how does it become a real, running thing?” — into a relay. You talk in plain English; each stage does its job and hands the next a single file, so nothing gets lost between steps. And when something isn’t right, it goes back around until it is.</p>
     </div>
     <div class="flow">
-      <div class="flow-step"><span class="role">Analyst</span><h3>Idea &amp; plan</h3><p>What you’re building and why, with clear done-criteria.</p></div>
-      <div class="flow-step"><span class="role">Designer</span><h3>What it looks like</h3><p>Screens and flow, before a line of code.</p></div>
-      <div class="flow-step"><span class="role">Builder</span><h3>Make it</h3><p>Writes the code and runs the tests.</p></div>
-      <div class="flow-step"><span class="role">DBA</span><h3>Data survives</h3><p>The part everyone forgets until the outage.</p></div>
-      <div class="flow-step"><span class="role">Operator</span><h3>Ship &amp; keep it running</h3><p>Deploy, release notes, support.</p></div>
+      <div class="flow-step flow-end"><span class="role">1 · Analyst</span><h3>Idea &amp; plan</h3><p>What you’re building and why, with clear done-criteria.</p><span class="model">Opus</span></div>
+      <div class="loop">
+        <p class="loop-label">↻ The loop — round and round until it’s right</p>
+        <div class="loop-steps">
+          <div class="flow-step"><span class="role">2 · Designer</span><h3>What it looks like</h3><p>Screens and flow, before a line of code.</p><span class="model">Sonnet</span></div>
+          <div class="flow-step"><span class="role">3 · DBA</span><h3>Where the data lives</h3><p>Settled before any code — the part everyone forgets until the outage.</p><span class="model">Opus</span></div>
+          <div class="flow-step"><span class="role">4 · Builder</span><h3>Make it</h3><p>Writes the code and runs its own tests.</p><span class="model">Sonnet</span></div>
+          <div class="flow-step"><span class="role">5 · Tester</span><h3>Prove it</h3><p>Runs it for real and checks every promise — someone other than who built it.</p><span class="model">Opus</span></div>
+        </div>
+        <div class="loop-back" aria-hidden="true"></div>
+        <p class="loop-note"><b>Not right yet?</b> The tester sends it back to whoever owns the fix — the designer if it’s not what you wanted, the DBA for data, the builder for a bug — then tests it again. Every lap is written down.</p>
+      </div>
+      <div class="flow-step flow-end"><span class="role">6 · Operator</span><h3>Ship &amp; keep it running</h3><p>Release, deploy, and the support notes for later.</p><span class="model">Haiku</span></div>
     </div>
-    <p class="flow-note"><b>That’s the whole DoGoDev flow:</b> workflow diagram → UI design → code → deployment → maintenance. The stages that don’t apply get skipped. You bring the vision and make the calls; the agents are your engineering staff, turning your direction into working software.</p>
+    <p class="flow-note"><b>That’s the whole DoGoDev flow:</b> plan → design → data → code → test, around again until it’s right → ship. Then you use it, your next idea becomes a new work item, and the cycle starts over — that’s how real software grows, one piece at a time. Stages that don’t apply get skipped.</p>
+    <p class="flow-note"><b>Each specialist runs on the Claude model that fits its job</b> — Opus where a mistake is expensive, Sonnet for the heavy lifting, Haiku for quick chores — so your plan’s usage goes where it counts. You bring the vision and make the calls; the agents are your engineering staff, turning your direction into working software.</p>
   </section>
 
   <hr class="rule">
@@ -354,8 +385,8 @@ The covenant: keep it simple — no paid services, nothing that needs an account
         <div class="term"><div class="term-bar"><div class="term-dots"><i></i><i></i><i></i></div><span class="term-label">In Claude Code</span><button class="copy" type="button">Copy</button></div>
           <pre><span class="cmt"># plain English — no special syntax</span>
 <span class="cmd">Have the analyst open a work item for a to-do list app.</span>
-<span class="cmd">Send it to the designer, then the builder.</span></pre></div>
-        <p>Each stage appends its work to one file for that task, so the next agent picks up exactly where the last left off. That’s it — your idea is becoming software.</p>
+<span class="cmd">Send it down the line to the tester.</span></pre></div>
+        <p>Each stage appends its work to one file for that task, so the next agent picks up exactly where the last left off. If the tester finds a problem, it names who should fix it — say <em>“send it back”</em> and it goes around again. When it passes, the tester tells you how to try it yourself; if it’s what you pictured, say <em>“operator, ship it.”</em> That’s it — your idea is becoming software.</p>
       </div></div>
     </div>
   </section>
@@ -414,7 +445,7 @@ The covenant: keep it simple — no paid services, nothing that needs an account
       <p>Every term this page (and your first week) throws at you, decoded. Nobody was born knowing these.</p>
     </div>
     <dl class="jargon">
-      <div><dt>agent</dt><dd>A Claude specialist with one job. DoGoDev ships five: analyst, designer, builder, dba, operator.</dd></div>
+      <div><dt>agent</dt><dd>A Claude specialist with one job. DoGoDev ships six: analyst, designer, dba, builder, tester, operator.</dd></div>
       <div><dt>CLAUDE.md</dt><dd>Your project’s house-rules file. The agents read it every session and treat it as law — it’s how they build <em>your</em> thing instead of guessing.</dd></div>
       <div><dt>CLI</dt><dd>Command-line interface — a program you use by typing commands instead of clicking buttons. Claude Code is one.</dd></div>
       <div><dt>clone</dt><dd>Download a full copy of a project, history and all. That’s how the DoGoDev suite gets to your machine.</dd></div>
@@ -423,8 +454,10 @@ The covenant: keep it simple — no paid services, nothing that needs an account
       <div><dt>git</dt><dd>The tool that keeps every version of your work, so nothing is ever truly lost.</dd></div>
       <div><dt>GitHub</dt><dd>The website where git projects live in the cloud. Your off-machine backup and your code’s public (or private) home.</dd></div>
       <div><dt>irm … | iex</dt><dd>PowerShell for “download this script and run it.” Healthy habit: read the script first — ours is at <a href="/new.ps1">dogodev.com/new.ps1</a>.</dd></div>
+      <div><dt>iterate</dt><dd>Go around again: test it, fix what’s wrong, test again. Nobody gets it right on the first pass — every real piece of software is built in laps.</dd></div>
+      <div><dt>model (Opus, Sonnet, Haiku)</dt><dd>Claude comes in several models, from the most careful thinker (Opus) to the quickest (Haiku). Each DoGoDev agent uses the one that fits its job.</dd></div>
       <div><dt>Node.js</dt><dd>The engine that runs your app’s code outside a web browser. The one runtime DoGoDev standardizes on.</dd></div>
-      <div><dt>pipeline</dt><dd>DoGoDev’s relay: each task’s file passes analyst → designer → builder → dba → operator, and every stage adds its section.</dd></div>
+      <div><dt>pipeline</dt><dd>DoGoDev’s relay: each task’s file passes analyst → designer → dba → builder → tester → operator, and every stage adds its section.</dd></div>
       <div><dt>PowerShell (PS&gt;)</dt><dd>Windows’ terminal. <code>PS&gt;</code> is just its prompt showing it’s ready — you never type that part.</dd></div>
       <div><dt>push</dt><dd>Send your commits up to GitHub. <em>This</em> is the step that actually backs your work up.</dd></div>
       <div><dt>repo</dt><dd>Repository — one project’s folder plus its entire git history. “The repo” = “the project.”</dd></div>
@@ -438,7 +471,7 @@ The covenant: keep it simple — no paid services, nothing that needs an account
   <footer>
     <div class="fmark"><span aria-hidden="true">🔥</span> Do<b>Go</b>Dev</div>
     <p>Small, guided dev tooling for building with Claude.</p>
-    <p class="gloss">dogo — Swahili for <em>small</em>. Part of the dogomoto family. · Draft front door, v0.6</p>
+    <p class="gloss">dogo — Swahili for <em>small</em>. Part of the dogomoto family. · Draft front door, v0.7</p>
   </footer>
 
 </div>
